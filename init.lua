@@ -6,37 +6,37 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- LSP Configuration & Plugins
-  use 'neovim/nvim-lspconfig'      -- Collection of configurations for built-in LSP client
-  use 'williamboman/mason.nvim'    -- LSP server installer
+  use 'neovim/nvim-lspconfig'   -- Collection of configurations for built-in LSP client
+  use 'williamboman/mason.nvim' -- LSP server installer
   use 'nvim-treesitter/nvim-treesitter'
   use "elentok/format-on-save.nvim"
   -- Autocompletion plugins
-  use 'hrsh7th/nvim-cmp'           -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'       -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer'         -- Buffer completions
-  use 'hrsh7th/cmp-path'           -- Path completions
-  use 'hrsh7th/cmp-cmdline'        -- Command-line completions
-  use 'saadparwaiz1/cmp_luasnip'   -- Snippet completions
-  use 'L3MON4D3/LuaSnip'           -- Snippets plugin
-  use 'mfussenegger/nvim-dap'  -- Debug Adapter Protocol plugin for Neovim
+  use 'hrsh7th/nvim-cmp'         -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'     -- LSP source for nvim-cmp
+  use 'hrsh7th/cmp-buffer'       -- Buffer completions
+  use 'hrsh7th/cmp-path'         -- Path completions
+  use 'hrsh7th/cmp-cmdline'      -- Command-line completions
+  use 'saadparwaiz1/cmp_luasnip' -- Snippet completions
+  use 'L3MON4D3/LuaSnip'         -- Snippets plugin
+  use 'mfussenegger/nvim-dap'    -- Debug Adapter Protocol plugin for Neovim
 
   -- Telescope
-  use 'nvim-lua/plenary.nvim'      -- Lua functions used by various plugins
+  use 'nvim-lua/plenary.nvim'         -- Lua functions used by various plugins
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder and more
 
   use 'tpope/vim-fugitive'
 
-  --editing 
+  --editing
   use 'kylechui/nvim-surround'
 
-  -- 
+  --
   use {
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup {
       }
     end
-}
+  }
 end)
 
 
@@ -46,10 +46,10 @@ vim.o.timeoutlen = 0
 vim.opt.clipboard:append("unnamedplus")
 
 vim.opt.relativenumber = true
-vim.opt.number = true  
+vim.opt.number = true
 
 vim.bo.tabstop = 2
-vim.bo.shiftwidth = 2 
+vim.bo.shiftwidth = 2
 vim.bo.expandtab = true
 vim.bo.softtabstop = 2
 -- vim.g.python3_host_prog = vim.fn.system('pdm info --python').gsub('%s+', '')
@@ -66,15 +66,19 @@ wk.register({
   },
   g = {
     name = "Git",
-    a = {":Git add -u<cr>", "Add"},
-    b = {":Git blame<cr>", "Blame"},
-    d = {":Git diff<cr>", "Diff"},
-    c = {"", ""},
+    a = { ":Git add -u<cr>", "Add" },
+    b = { ":Git blame<cr>", "Blame" },
+    d = { ":Git diff<cr>", "Diff" },
+    c = { "", "" },
   }
 }, { prefix = "<leader>" })
 
 -- LSP settings
 local lspconfig = require('lspconfig')
+
+-- Configure LSP
+lspconfig.pyright.setup {}
+lspconfig.lua_ls.setup {}
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
@@ -89,11 +93,9 @@ format_on_save.setup({
   },
   formatter_by_ft = {
     python = formatters.lsp,
+    lua = formatters.lsp,
   },
 })
--- Configure LSP
-lspconfig.pyright.setup{}
-lspconfig.lua_ls.setup{}
 
 -- Setup nvim-cmp
 cmp.setup({
@@ -133,9 +135,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   end,
 })
 
-vim.api.nvim_create_autocmd({'BufWritePre'}, {
-      pattern = 'init.lua',
-      command = "PackerInstall"
-    })
-
-
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = 'init.lua',
+  command = "PackerInstall"
+})
