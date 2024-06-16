@@ -91,9 +91,13 @@ vim.bo.softtabstop = 2
 
 -- Keymap funcs
 local function git_add_commit_push()
-  -- Run the Fugitive commands for Git operations
+  local commit_message = vim.fn.input("Commit message: ")
+  if commit_message == "" then
+    print("Aborting commit due to empty commit message")
+    return
+  end
   vim.cmd(':Git add -u')
-  vim.cmd(':Git commit')
+  vim.cmd(':Git commit -m "' .. commit_message .. '"')
   vim.cmd(':Git push')
 end
 
