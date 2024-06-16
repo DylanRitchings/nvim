@@ -27,6 +27,11 @@ require('packer').startup(function()
 
   use 'tpope/vim-fugitive'
 
+  --editing 
+
+  use 'kylechui/nvim-surround'
+
+  -- 
   use {
     "folke/which-key.nvim",
     config = function()
@@ -130,6 +135,15 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   end,
 })
 
+-- vim.api.nvim_create_augroup('AutoInit', {})
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   pattern = 'init.lua',
+--   group = 'AutoInit',
+--   callback = function()
+--     vim.cmd([[PackerInstall]])
+--   end,
+-- })
+
 -- Auto run PackerInstall on saving init.lua
 vim.cmd([[
     augroup packer_user_config
@@ -137,3 +151,4 @@ vim.cmd([[
         autocmd BufWritePost init.lua source <afile> | PackerInstall
     augroup end
 ]])
+
