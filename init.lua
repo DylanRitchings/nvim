@@ -125,6 +125,7 @@ wk.register({
   -- - window movement, vert, hori, close...
   -- - move buffer to seperate thing, close buf, recent files/buffs
   -- - more file finding, current repo...
+  -- - git add this file, quick push remember last commit
 }, { prefix = "<leader>" })
 
 -- LSP settings
