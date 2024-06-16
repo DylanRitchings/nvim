@@ -89,6 +89,14 @@ vim.bo.expandtab = true
 vim.bo.softtabstop = 2
 -- vim.g.python3_host_prog = vim.fn.system('pdm info --python').gsub('%s+', '')
 
+-- Keymap funcs
+local function git_add_commit_push()
+  -- Run the Fugitive commands for Git operations
+  vim.cmd(':Git add -u')
+  vim.cmd(':Git commit')
+  vim.cmd(':Git push')
+end
+
 -- Basic keymaps
 local wk = require("which-key")
 wk.register({
@@ -105,6 +113,8 @@ wk.register({
     d = { ":Git diff<cr>", "Diff" },
     p = { ":Git push<cr>", "Push" },
     c = { ":Git commit<cr>", "Commit" },
+    s = { ":Git status<cr>", "Status" },
+    q = { git_add_commit_push, "Quick push" },
   }
 }, { prefix = "<leader>" })
 
