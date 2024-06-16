@@ -10,7 +10,6 @@ require('packer').startup(function()
   use 'williamboman/mason.nvim'    -- LSP server installer
   use 'nvim-treesitter/nvim-treesitter'
   use "elentok/format-on-save.nvim"
-
   -- Autocompletion plugins
   use 'hrsh7th/nvim-cmp'           -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'       -- LSP source for nvim-cmp
@@ -28,7 +27,6 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
 
   --editing 
-
   use 'kylechui/nvim-surround'
 
   -- 
@@ -135,20 +133,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   end,
 })
 
--- vim.api.nvim_create_augroup('AutoInit', {})
--- vim.api.nvim_create_autocmd('BufWritePost', {
---   pattern = 'init.lua',
---   group = 'AutoInit',
---   callback = function()
---     vim.cmd([[PackerInstall]])
---   end,
--- })
+vim.api.nvim_create_autocmd({'BufWritePre'}, {
+      pattern = 'init.lua',
+      command = "PackerInstall"
+    })
 
--- Auto run PackerInstall on saving init.lua
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost init.lua source <afile> | PackerInstall
-    augroup end
-]])
 
