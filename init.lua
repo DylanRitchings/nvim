@@ -10,16 +10,16 @@ require('packer').startup(function()
   use 'williamboman/mason.nvim' -- LSP server installer
   use 'nvim-treesitter/nvim-treesitter'
   use "elentok/format-on-save.nvim"
-  -- Autocompletion plugins
-  use 'hrsh7th/nvim-cmp'         -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'     -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer'       -- Buffer completions
-  use 'hrsh7th/cmp-path'         -- Path completions
-  use 'hrsh7th/cmp-cmdline'      -- Command-line completions
-  use 'saadparwaiz1/cmp_luasnip' -- Snippet completions
-  use 'L3MON4D3/LuaSnip'         -- Snippets plugin
-  use 'mfussenegger/nvim-dap'    -- Debug Adapter Protocol plugin for Neovim
+  use 'mfussenegger/nvim-dap'
 
+  -- Autocompletion plugins
+  use 'hrsh7th/nvim-cmp'              -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'          -- LSP source for nvim-cmp
+  use 'hrsh7th/cmp-buffer'            -- Buffer completions
+  use 'hrsh7th/cmp-path'              -- Path completions
+  use 'hrsh7th/cmp-cmdline'           -- Command-line completions
+  use 'saadparwaiz1/cmp_luasnip'      -- Snippet completions
+  use 'L3MON4D3/LuaSnip'              -- Snippets plugin
   -- Telescope
   use 'nvim-lua/plenary.nvim'         -- Lua functions used by various plugins
   use 'nvim-telescope/telescope.nvim' -- Fuzzy finder and more
@@ -27,9 +27,10 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
 
   --editing
-  use 'kylechui/nvim-surround'
-
-  --
+  --put back surround
+  -- theme
+  use "rebelot/kanagawa.nvim"
+  -- bindings
   use {
     "folke/which-key.nvim",
     config = function()
@@ -38,6 +39,10 @@ require('packer').startup(function()
     end
   }
 end)
+
+
+-- theme
+vim.cmd('colorscheme kanagawa')
 
 
 -- Basic settings
