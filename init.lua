@@ -120,6 +120,11 @@ wk.register({
     s = { ":Git status<cr>", "Status" },
     q = { git_add_commit_push, "Quick push" },
   }
+
+  -- TODO
+  -- - window movement, vert, hori, close...
+  -- - move buffer to seperate thing, close buf, recent files/buffs
+  -- - more file finding, current repo...
 }, { prefix = "<leader>" })
 
 -- LSP settings
