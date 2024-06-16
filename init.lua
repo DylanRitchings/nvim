@@ -10,6 +10,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 --
 
@@ -39,9 +40,11 @@ require("lazy").setup({
   'tpope/vim-fugitive',
 
   --editing
-  --put back surround
-  -- theme
-  "rebelot/kanagawa.nvim",
+  --put back surround\
+
+  -- Looks
+  "rebelot/kanagawa.nvim", -- Theme
+
   -- bindings
   {
     "folke/which-key.nvim",
@@ -100,7 +103,8 @@ wk.register({
     a = { ":Git add -u<cr>", "Add" },
     b = { ":Git blame<cr>", "Blame" },
     d = { ":Git diff<cr>", "Diff" },
-    c = { "", "" },
+    p = { ":Git push<cr>", "Push" },
+    c = { ":Git commit<cr>", "Commit" },
   }
 }, { prefix = "<leader>" })
 
@@ -165,3 +169,5 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     vim.cmd([[!latexmk -pdf -pv -xelatex]])
   end,
 })
+
+vim.fn.system('pdm info --packages')
