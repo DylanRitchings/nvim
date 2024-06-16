@@ -129,3 +129,11 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     vim.cmd([[!latexmk -pdf -pv -xelatex]])
   end,
 })
+
+-- Auto run PackerInstall on saving init.lua
+vim.cmd([[
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost init.lua source <afile> | PackerInstall
+    augroup end
+]])
