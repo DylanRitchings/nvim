@@ -24,7 +24,10 @@ require("lazy").setup({
   "elentok/format-on-save.nvim",
   'mfussenegger/nvim-dap',
   'folke/lazydev.nvim',
-
+  {
+    "X3eRo0/dired.nvim",
+    dependencies = "MunifTanjim/nui.nvim"
+  },
   -- Autocompletion plugins
   'hrsh7th/nvim-cmp',              -- Autocompletion plugin
   'hrsh7th/cmp-nvim-lsp',          -- LSP source for nvim-cmp
@@ -101,7 +104,7 @@ local function git_add_commit_push()
   vim.cmd(':Git push')
 end
 
--- Basic keymaps
+-- Basic keymaps/bindings
 local wk = require("which-key")
 wk.register({
   f = {
@@ -109,6 +112,7 @@ wk.register({
     d = { "<cmd>Telescope find_files<cr>", "Find File dir" },
     g = { "<cmd>Telescope live_grep<cr>", "Grep" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    f = { ":Dired<cr>", "Dired" },
   },
   g = {
     name = "Git",
