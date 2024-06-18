@@ -20,7 +20,7 @@ require("lazy").setup({
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',   -- Collection of configurations for built-in LSP client
   'williamboman/mason.nvim', -- LSP server installer
-
+  'stsewd/isort.nvim',
   'nvim-treesitter/nvim-treesitter',
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
@@ -80,16 +80,21 @@ require("lazy").setup({
     dependencies = "MunifTanjim/nui.nvim"
   },
   -- Autocompletion plugins
-  'hrsh7th/nvim-cmp',              -- Autocompletion plugin
-  'hrsh7th/cmp-nvim-lsp',          -- LSP source for nvim-cmp
-  'hrsh7th/cmp-buffer',            -- Buffer completions
-  'hrsh7th/cmp-path',              -- Path completions
-  'hrsh7th/cmp-cmdline',           -- Command-line completions
-  'saadparwaiz1/cmp_luasnip',      -- Snippet completions
-  'L3MON4D3/LuaSnip',              -- Snippets plugin
+  'hrsh7th/nvim-cmp',                -- Autocompletion plugin
+  'hrsh7th/cmp-nvim-lsp',            -- LSP source for nvim-cmp
+  'hrsh7th/cmp-buffer',              -- Buffer completions
+  'hrsh7th/cmp-path',                -- Path completions
+  'hrsh7th/cmp-cmdline',             -- Command-line completions
+  'saadparwaiz1/cmp_luasnip',        -- Snippet completions
+  'L3MON4D3/LuaSnip',                -- Snippets plugin
   -- Telescope
-  'nvim-lua/plenary.nvim',         -- Lua functions used by various plugins
-  'nvim-telescope/telescope.nvim', -- Fuzzy finder and more
+  'nvim-lua/plenary.nvim',           -- Lua functions used by various plugins
+  {
+    'nvim-telescope/telescope.nvim', -- Fuzzy finder and more
+    -- config = function()
+    --   require("telescope.builtin").find_files { path_display = { "truncate" } }
+    -- end
+  },
 
   'tpope/vim-fugitive',
 
@@ -176,14 +181,14 @@ wk.register({
     b = { ":Git blame<cr>", "Blame" },
     d = { ":Git diff<cr>", "Diff" },
     p = { ":Git push<cr>", "Push" },
-    c = { ":Git commit<cr>", "Commit" },
+    c = { ":Git commit -m ", "Commit" },
     s = { ":Git status<cr>", "Status" },
     q = { git_add_commit_push, "Quick push" },
   },
   b = {
     name = "Buffers",
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    d = { "", "Close" },
+    d = { ":bd<cr>", "Close" },
   },
 
 
@@ -192,9 +197,15 @@ wk.register({
   -- - move buffer to seperate thing, close buf, recent files/buffs
   -- - more file finding, current repo...
   -- - git add this file, quick push remember last commit
+  -- telescope help
 
 }, { prefix = "<leader>" })
 
+require('telescope').setup {
+  defaults = {
+    path_display = { "smart" }
+  }
+}
 -- LSP settings
 local lspconfig = require('lspconfig')
 
