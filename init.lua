@@ -20,10 +20,61 @@ require("lazy").setup({
   -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',   -- Collection of configurations for built-in LSP client
   'williamboman/mason.nvim', -- LSP server installer
+
   'nvim-treesitter/nvim-treesitter',
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    after = 'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+            },
+            selection_modes = {
+              ['@parameter.outer'] = 'v', -- charwise
+              ['@function.outer'] = 'V',  -- linewise
+              ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            include_surrounding_whitespace = true,
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
+            },
+          },
+          select = {
+            enable = true,
+            keymaps = {
+              -- Your custom capture.
+              ["aF"] = "@custom_capture",
+
+              -- Built-in captures.
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+            },
+          },
+        },
+      }
+    end
+  },
+
   "elentok/format-on-save.nvim",
   'mfussenegger/nvim-dap',
   'folke/lazydev.nvim',
+
   {
     "X3eRo0/dired.nvim",
     dependencies = "MunifTanjim/nui.nvim"
@@ -71,6 +122,9 @@ require("lazy").setup({
   },
 })
 
+if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+  vim.o.shell = '/c/Users/dylan.ritchings/dev/software/Git/usr/bin/bash.exe'
+end
 
 vim.g.lazydev_enabled = true
 
@@ -109,10 +163,12 @@ local wk = require("which-key")
 wk.register({
   f = {
     name = "file",
-    d = { "<cmd>Telescope find_files<cr>", "Find File dir" },
+    r = { "<cmd>Telescope find_files<cr>", "Whole repo" },
+    d = { "<cmd>Telescope find_files<cr>", "Current dir" },
     g = { "<cmd>Telescope live_grep<cr>", "Grep" },
-    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    f = { ":Dired<cr>", "Dired" },
+    -- b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    f = { "<cmd>Dired<cr>", "Dired" },
+    c = { "<cr>", "Config" },
   },
   g = {
     name = "Git",
@@ -123,7 +179,13 @@ wk.register({
     c = { ":Git commit<cr>", "Commit" },
     s = { ":Git status<cr>", "Status" },
     q = { git_add_commit_push, "Quick push" },
-  }
+  },
+  b = {
+    name = "Buffers",
+    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    d = { "", "Close" },
+  },
+
 
   -- TODO
   -- - window movement, vert, hori, close...
@@ -137,7 +199,8 @@ wk.register({
 local lspconfig = require('lspconfig')
 
 -- Configure LSP
-lspconfig.pyright.setup {}
+lspconfig.ruff_lsp.setup {}
+
 lspconfig.lua_ls.setup {}
 
 local cmp = require('cmp')
@@ -196,3 +259,11 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 vim.fn.system('pdm info --packages')
+
+
+
+-- Scroll down half a screen and keep cursor in the middle
+vim.api.nvim_set_keymap('n', '<C-D>', '<C-D>zz', { noremap = true, silent = true })
+
+-- Scroll up half a screen and keep cursor in the middle
+vim.api.nvim_set_keymap('n', '<C-U>', '<C-U>zz', { noremap = true, silent = true })
