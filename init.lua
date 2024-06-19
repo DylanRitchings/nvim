@@ -114,7 +114,21 @@ require("lazy").setup({
   --put back surround\
 
   -- Looks
-  "rebelot/kanagawa.nvim", -- Theme
+  -- "rebelot/kanagawa.nvim", -- Theme
+  {
+    -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    lazy = false,
+    config = function()
+      require('onedark').setup {
+        -- Set a style preset. 'dark' is default.
+        style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
+        transparent = true
+      }
+      require('onedark').load()
+    end,
+  },
 
   -- bindings
   {
