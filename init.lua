@@ -159,8 +159,6 @@ end
 
 vim.g.lazydev_enabled = true
 
--- theme
-vim.cmd('colorscheme kanagawa')
 
 
 -- Basic settings
