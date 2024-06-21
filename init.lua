@@ -11,6 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 
+
 vim.opt.rtp:prepend(lazypath)
 --
 
@@ -206,6 +207,7 @@ wk.register({
     b = { ":Git blame<cr>", "Blame" },
     d = { ":Git diff<cr>", "Diff" },
     p = { ":Git push<cr>", "Push" },
+    P = { ":Git pull<cr>", "Pull" },
     c = { ":Git commit -m ", "Commit" },
     s = { ":Git status<cr>", "Status" },
     q = { git_add_commit_push, "Quick push" },
