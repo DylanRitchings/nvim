@@ -196,13 +196,14 @@ local function ex_in_dir(func)
 end
 -- Basic keymaps/bindings
 local wk = require("which-key")
+local ts = require("telescope.builtin")
 wk.register({
-	["<cr>"] = { ex_in_dir(require('telescope.builtin').git_files), "Search whole repo" },
-	["."] = { ex_in_dir(require('telescope.builtin').find_files), "Search current dir" },
+	["<cr>"] = { ex_in_dir(ts.git_files), "Search whole repo" },
+	["."] = { ex_in_dir(ts.find_files), "Search current dir" },
 	f = {
 		name = "file",
 		-- f = { "<cmd>Telescope find_files<cr>", "Search current dir" },
-		g = { ex_in_dir(require('telescope.builtin').live_grep), "Grep" },
+		g = { ex_in_dir(ts.live_grep), "Grep" },
 		-- b = { "<cmd>Telescope buffers<cr>", "Buffers" },
 		d = { "<cmd>Dired<cr>", "Dired" },
 		c = { "<cmd>edit " .. vim.fn.stdpath('config') .. "/init.lua<cr>", "Config" },
@@ -225,7 +226,7 @@ wk.register({
 	},
 
 
-	-- <cmd>lua require('telescope.builtin').find_files({cwd = vim.fn.expand('%:p:h')})<cr>
+	-- <cmd>lua ts.find_files({cwd = vim.fn.expand('%:p:h')})<cr>
 	-- TODO
 	-- - window movement, vert, hori, close...
 	-- - move buffer to seperate thing, close buf, recent files/buffs
@@ -290,7 +291,12 @@ cmp.setup({
 -- Setup lspconfig with nvim-cmp capabilities
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig.pyright.setup {
+	cmd = { "pyright-langserver" },
 	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 150,
+	}
+
 }
 
 -- compile latex on save
