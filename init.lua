@@ -245,12 +245,25 @@ require('telescope').setup {
 local lspconfig = require('lspconfig')
 
 -- Configure LSP
-lspconfig.ruff_lsp.setup {}
+-- lspconfig.ruff_lsp.setup {}
 
 lspconfig.lua_ls.setup {}
 
+-- Setup lspconfig with nvim-cmp capabilities
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- lspconfig.pyright.setup {
+-- 	cmd = { "pyright-langserver", "--stdio" },
+-- 	capabilities = capabilities,
+-- 	flags = {
+-- 		debounce_text_changes = 150,
+-- 	}
+--
+-- }
+-- vim.lsp.set_log_level("debug")
+
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+
 -- format on save
 local format_on_save = require("format-on-save")
 local formatters = require("format-on-save.formatters")
@@ -287,17 +300,6 @@ cmp.setup({
 		{ name = 'buffer' },
 	})
 })
-
--- Setup lspconfig with nvim-cmp capabilities
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-lspconfig.pyright.setup {
-	cmd = { "pyright-langserver" },
-	capabilities = capabilities,
-	flags = {
-		debounce_text_changes = 150,
-	}
-
-}
 
 -- compile latex on save
 vim.api.nvim_create_augroup('AutoPdf', {})
