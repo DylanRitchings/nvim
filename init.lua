@@ -245,7 +245,16 @@ require('telescope').setup {
 local lspconfig = require('lspconfig')
 
 -- Configure LSP
--- lspconfig.ruff_lsp.setup {}
+local on_attach = function(client, bufnr)
+  if client.name == 'ruff' then
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
+end
+
+require('lspconfig').ruff.setup {
+  on_attach = on_attach,
+}
 
 lspconfig.lua_ls.setup {}
 
@@ -260,7 +269,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --
 -- }
 -- vim.lsp.set_log_level("debug")
-
+lspconfig.pylsp.setup {}
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
