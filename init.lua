@@ -56,7 +56,7 @@ require("lazy").setup({
       workspaces = {
         {
           name = "notes",
-          path = "~/Synced/Notes/",
+          path = "~/notes/",
         },
       },
     }
@@ -108,7 +108,7 @@ vim.bo.shiftwidth = 2
 vim.bo.expandtab = true
 vim.bo.softtabstop = 2
 -- vim.g.python3_host_prog = vim.fn.system('pdm info --python').gsub('%s+', '')
-
+vim.wo.conceallevel = 1
 -- Keymap funcs
 local function git_add_commit_push()
   local commit_message = vim.fn.input("Commit message: ")
