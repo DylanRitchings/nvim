@@ -24,6 +24,32 @@ require("lazy").setup({
 	'stsewd/isort.nvim',
 	'nvim-treesitter/nvim-treesitter',
 	{
+      
+      --   -- LSP Configuration & Plugins
+--   'neovim/nvim-lspconfig',   -- Collection of configurations for built-in LSP client
+--   'williamboman/mason.nvim', -- LSP server installer
+--   'nvim-treesitter/nvim-treesitter',
+--   "elentok/format-on-save.nvim",
+--   'mfussenegger/nvim-dap',
+--   'folke/lazydev.nvim',
+
+--   -- Autocompletion plugins
+--   'hrsh7th/nvim-cmp',              -- Autocompletion plugin
+--   'hrsh7th/cmp-nvim-lsp',          -- LSP source for nvim-cmp
+--   'hrsh7th/cmp-buffer',            -- Buffer completions
+--   'hrsh7th/cmp-path',              -- Path completions
+--   'hrsh7th/cmp-cmdline',           -- Command-line completions
+--   'saadparwaiz1/cmp_luasnip',      -- Snippet completions
+--   'L3MON4D3/LuaSnip',              -- Snippets plugin
+--   -- Telescope
+--   'nvim-lua/plenary.nvim',         -- Lua functions used by various plugins
+--   'nvim-telescope/telescope.nvim', -- Fuzzy finder and more
+
+--   'tpope/vim-fugitive',
+
+--   --editing
+--   --put back surround\
+
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 		after = 'nvim-treesitter/nvim-treesitter',
@@ -71,6 +97,9 @@ require("lazy").setup({
 			}
 		end
 	},
+    
+ -- Looks
+  "rebelot/kanagawa.nvim", -- Theme
 
 	"elentok/format-on-save.nvim",
 	'mfussenegger/nvim-dap',
@@ -82,8 +111,8 @@ require("lazy").setup({
 		config = function()
 			require("dired").setup {
 				path_separator = "/",
-				show_banner = false,
-				show_icons = false,
+				show_banner = true,
+				show_icons = true,
 				show_hidden = true,
 				show_dot_dirs = true,
 				show_colors = true,
@@ -108,6 +137,28 @@ require("lazy").setup({
 		--   require("telescope.builtin").find_files { path_display = { "truncate" } }
 		-- end
 	},
+    
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "~/notes/",
+        },
+      },
+    }
+  },
+
 
 
 	'tpope/vim-fugitive',
@@ -125,7 +176,7 @@ require("lazy").setup({
 		config = function()
 			require('onedark').setup {
 				-- Set a style preset. 'dark' is default.
-				style = 'light', -- dark, darker, cool, deep, warm, warmer, light
+				style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
 				transparent = false
 			}
 			require('onedark').load()
@@ -176,7 +227,7 @@ vim.bo.shiftwidth = 2
 vim.bo.expandtab = true
 vim.bo.softtabstop = 2
 -- vim.g.python3_host_prog = vim.fn.system('pdm info --python').gsub('%s+', '')
-
+vim.wo.conceallevel = 1
 -- Keymap funcs
 local function git_add_commit_push()
 	local commit_message = vim.fn.input("Commit message: ")
