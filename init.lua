@@ -266,34 +266,26 @@ end
 -- Basic keymaps/bindings
 local wk = require("which-key")
 local ts = require("telescope.builtin")
--- wk.register({
--- 	["<cr>"] = { ex_in_dir(ts.git_files), "Search whole repo" },
--- 	["."] = { ex_in_dir(ts.find_files), "Search current dir" },
--- 	f = {
--- 		name = "file",
--- 		-- f = { "<cmd>Telescope find_files<cr>", "Search current dir" },
--- 		g = { ex_in_dir(ts.live_grep), "Grep" },
--- 		-- b = { "<cmd>Telescope buffers<cr>", "Buffers" },
--- 		d = { "<cmd>Dired<cr>", "Dired" },
--- 		c = { "<cmd>edit " .. vim.fn.stdpath("config") .. "/init.lua<cr>", "Config" },
--- 	},
--- 	g = {
--- 		name = "Git",
--- 		a = { ":Git add -u<cr>", "Add" },
--- 		b = { ":Git blame<cr>", "Blame" },
--- 		d = { ":Git diff<cr>", "Diff" },
--- 		p = { ":Git push<cr>", "Push" },
--- 		P = { ":Git pull<cr>", "Pull" },
--- 		c = { ":Git commit -m ", "Commit" },
--- 		s = { ":Git status<cr>", "Status" },
--- 		q = { git_add_commit_push, "Quick push" },
--- 	},
--- 	b = {
--- 		name = "Buffers",
--- 		b = { "<cmd>Telescope buffers<cr>", "Buffers" },
--- 		d = { ":bd<cr>", "Close" },
--- 	},
---
+wk.add({
+
+	{ "<leader><cr>", ex_in_dir(ts.git_files), desc = "Search whole repo" },
+	{ "<leader>.", ex_in_dir(ts.find_files), desc = "Search current dir" },
+	{ "<leader>f", group = "file" },
+	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Search current dir" },
+	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+	{ "<leader>fd", "<cmd>Dired<cr>", desc = "Dired" },
+	{ "<leader>fc", "<cmd>edit " .. vim.fn.stdpath("config") .. "/init.lua<cr>", desc = "Config" },
+	{ "<leader>g", group = "git" },
+	{ "<leader>ga", ":Git add -u<cr>", desc = "Add" },
+	{ "<leader>gb", ":Git blame<cr>", desc = "Blame" },
+	{ "<leader>gd", ":Git diff<cr>", desc = "Diff" },
+	{ "<leader>gp", ":Git push<cr>", desc = "Push" },
+	{ "<leader>gP", ":Git pull<cr>", desc = "Pull" },
+	{ "<leader>gc", ":Git commit -m ", desc = "Commit" },
+	{ "<leader>gs", ":Git status<cr>", desc = "Status" },
+	{ "<leader>gq", "Quick push", desc = "Quick push" },
+})
+
 -- 	-- <cmd>lua ts.find_files({cwd = vim.fn.expand('%:p:h')})<cr>
 -- 	-- TODO
 -- 	-- - window movement, vert, hori, close...
@@ -394,3 +386,15 @@ vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true
 
 -- Scroll up half a screen and keep cursor in the middle
 vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true })
+
+-- Enable line wrapping
+vim.wo.wrap = true
+
+-- Preserve indentation when wrapping lines
+vim.wo.breakindent = true
+
+-- Specify a string to be displayed at the start of wrapped lines
+vim.opt.showbreak = ">> "
+
+-- Avoid breaking words when wrapping lines
+vim.opt.linebreak = true
