@@ -37,7 +37,29 @@ require("lazy").setup({
 		"stsewd/isort.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"elentok/format-on-save.nvim",
+		{
+			"epwalsh/obsidian.nvim",
+			version = "*",
+			lazy = true,
+			ft = "markdown",
 
+			dependencies = {
+				-- Required.
+				"nvim-lua/plenary.nvim",
+
+				-- see below for full list of optional dependencies 👇
+			},
+			opts = {
+				workspaces = {
+					{
+						name = "notes",
+						path = "~/notes",
+					},
+				},
+
+				-- see below for full list of options 👇
+			},
+		},
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			dependencies = "nvim-treesitter/nvim-treesitter",
