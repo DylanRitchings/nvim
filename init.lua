@@ -35,7 +35,7 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig", -- Collection of configurations for built-in LSP client
 	"williamboman/mason.nvim", -- LSP server installer
 	"stsewd/isort.nvim",
-	"nvim-treesitter/nvim-treesitter",
+	-- "nvim-treesitter/nvim-treesitter",
 
 	"elentok/format-on-save.nvim",
 
@@ -70,9 +70,9 @@ require("lazy").setup({
 	"hrsh7th/cmp-buffer", -- Buffer completions
 	"hrsh7th/cmp-path", -- Path completions
 	"hrsh7th/cmp-cmdline", -- Command-line completions
-	"saadparwaiz1/cmp_luasnip", -- Snippet completions
+	-- "saadparwaiz1/cmp_luasnip", -- Snippet completions
 
-  { "L3MON4D3/LuaSnip", run = "make install_jsregexp" }
+	-- { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
 
 	-- Telescope
 	"nvim-lua/plenary.nvim", -- Lua functions used by various plugins
@@ -258,8 +258,8 @@ lspconfig.pylsp.setup({
 	},
 })
 
-local cmp = require("cmp")
-local luasnip = require("luasnip")
+-- local cmp = require("cmp")
+-- local luasnip = require("luasnip")
 
 -- format on save
 local format_on_save = require("format-on-save")
@@ -276,27 +276,27 @@ format_on_save.setup({
 	},
 })
 
--- Setup nvim-cmp
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-	}, {
-		{ name = "buffer" },
-	}),
-})
+-- -- Setup nvim-cmp
+-- cmp.setup({
+-- 	snippet = {
+-- 		expand = function(args)
+-- 			luasnip.lsp_expand(args.body)
+-- 		end,
+-- 	},
+-- 	mapping = cmp.mapping.preset.insert({
+-- 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+-- 		["<C-f>"] = cmp.mapping.scroll_docs(4),
+-- 		["<C-Space>"] = cmp.mapping.complete(),
+-- 		["<C-e>"] = cmp.mapping.abort(),
+-- 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
+-- 	}),
+-- 	sources = cmp.config.sources({
+-- 		{ name = "nvim_lsp" },
+-- 		{ name = "luasnip" },
+-- 	}, {
+-- 		{ name = "buffer" },
+-- 	}),
+-- })
 
 -- compile latex on save
 vim.api.nvim_create_augroup("AutoPdf", {})
