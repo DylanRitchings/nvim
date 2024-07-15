@@ -12,9 +12,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
---
 
 vim.g.mapleader = " "
+
+vim.g.lazyvim_python_ruff = "ruff"
 
 require("lazy").setup({
 
@@ -30,9 +31,25 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.test.core" },
 		{ import = "lazyvim.plugins.extras.lang.python" },
 	},
-
+	opts = {
+		servers = {},
+	},
 	{
-		"neovim/nvim-lspconfig", -- Collection of configurations for built-in LSP client
+		{
+			"neovim/nvim-lspconfig",
+			opts = {
+				servers = {
+					pyright = {
+						mason = false,
+						disableLanguageServices = true,
+						reportMissingModuleSource = "none",
+						reportMissingImports = "none",
+						reportUndefinedVariable = "none",
+						disableOrganizeImports = true,
+					},
+				},
+			},
+		},
 		"williamboman/mason.nvim", -- LSP server installer
 		"stsewd/isort.nvim",
 		"nvim-treesitter/nvim-treesitter",
@@ -302,7 +319,6 @@ require("telescope").setup({
 })
 -- LSP settings
 local lspconfig = require("lspconfig")
-
 -- Configure LSP
 local on_attach = function(client, bufnr)
 	if client.name == "ruff" then
