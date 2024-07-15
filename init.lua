@@ -57,21 +57,22 @@ require("lazy").setup({
 		end,
 	},
 	-- Autocompletion plugins
-  {
-    "hrsh7th/nvim-cmp",
-    version = false, -- last release is way too old
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-  },
-  },
+	{
+		"hrsh7th/nvim-cmp",
+		version = false, -- last release is way too old
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+	},
 	"hrsh7th/cmp-buffer", -- Buffer completions
 	"hrsh7th/cmp-path", -- Path completions
 	"hrsh7th/cmp-cmdline", -- Command-line completions
 	"saadparwaiz1/cmp_luasnip", -- Snippet completions
-	"L3MON4D3/LuaSnip", -- Snippets plugin
+
+  { "L3MON4D3/LuaSnip", run = "make install_jsregexp" }
 
 	-- Telescope
 	"nvim-lua/plenary.nvim", -- Lua functions used by various plugins
@@ -84,7 +85,6 @@ require("lazy").setup({
 	},
 
 	"tpope/vim-fugitive",
-
 	--editing
 	--put back surround\
 
@@ -118,7 +118,6 @@ require("lazy").setup({
 		},
 	},
 })
-
 
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	vim.o.shell = "/c/Users/dylan.ritchings/dev/software/Git/usr/bin/bash.exe"
@@ -225,15 +224,14 @@ local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({})
 
 -- Setup lspconfig with nvim-cmp capabilities
---local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- lspconfig.pyright.setup {
--- 	cmd = { "pyright-langserver", "--stdio" },
--- 	capabilities = capabilities,
--- 	flags = {
--- 		debounce_text_changes = 150,
--- 	}
---
--- }
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+lspconfig.pyright.setup({
+	cmd = { "pyright-langserver", "--stdio" },
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 150,
+	},
+})
 -- vim.lsp.set_log_level("debug")
 lspconfig.pylsp.setup({
 
