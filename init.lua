@@ -334,13 +334,9 @@ require("lspconfig").ruff.setup({
 lspconfig.lua_ls.setup({})
 
 -- Setup lspconfig with nvim-cmp capabilities
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- lspconfig.pyright.setup {
--- 	cmd = { "pyright-langserver", "--stdio" },
--- 	capabilities = capabilities,
--- 	flags = {
--- 		debounce_text_changes = 150,
--- 	}
+lspconfig.pyright.setup({
+	autostart = false,
+})
 --
 -- }
 -- vim.lsp.set_log_level("debug")
