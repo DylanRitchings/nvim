@@ -116,7 +116,7 @@ require("lazy").setup({
 				})
 			end,
 		},
-
+		"bullets-vim/bullets.vim",
 		{
 			"cameron-wags/rainbow_csv.nvim",
 			config = true,
