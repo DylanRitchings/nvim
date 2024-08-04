@@ -40,51 +40,25 @@ require("lazy").setup({
 		},
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "lazyvim.plugins.extras.test.core" },
-		{ import = "lazyvim.plugins.extras.lang.python",
-      opts = {
-        adapters = {
-          ["neotest-python"] = {},
-        },
-        settings = {
-          options = {
-          notify_user_on_venv_activation = true,
-        },
-      },
-
-  },
+		{ import = "lazyvim.plugins.extras.lang.python" },
+		opts = {
+			adapters = {
+				["neotest-python"] = {},
+			},
+			settings = {
+				options = {
+					notify_user_on_venv_activation = true,
+				},
+			},
+		},
 	},
 	opts = {
 		servers = {},
 	},
 	{
 		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-		-- {
-		-- 	"neovim/nvim-lspconfig",
-		-- 	opts = {
-		-- 		servers = {
-		-- 			pyright = {
-		-- 				mason = false,
-		-- 				disableLanguageServices = true,
-		-- 				reportMissingModuleSource = "none",
-		-- 				reportMissingImports = "none",
-		-- 				reportUndefinedVariable = "none",
-		-- 				disableOrganizeImports = true,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- },
 		"williamboman/mason.nvim", -- LSP server installer
 		"stsewd/isort.nvim",
-		-- "nvim-treesitter/nvim-treesitter",
-		-- {
-		-- 	"linux-cultist/venv-selector.nvim",
-		-- 	dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
-		-- 	event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-		-- 	keys = {
-		-- 		{ "<leader>vs", "<cmd>VenvSelect<cr>" },
-		-- 		{ "<leader>vc", "<cmd>VenvSelectCached<cr>" },
-		-- 	},
-		-- },
 		{
 			"mfussenegger/nvim-dap-python",
 			config = function()
@@ -118,30 +92,6 @@ require("lazy").setup({
 				end, { desc = "Debug Test File" })
 			end,
 		},
-		-- "elentok/format-on-save.nvim",
-
-		-- {
-		-- 	"nvim-neotest/neotest",
-		-- 	dependencies = {
-		-- 		"nvim-lua/plenary.nvim",
-		-- 		"antoinemadec/FixCursorHold.nvim",
-		-- 		"nvim-treesitter/nvim-treesitter",
-		-- 	},
-		-- 	config = function()
-		-- 		require("neotest").setup({
-		-- 			log_level = 5,
-		-- 			adapters = {
-		-- 				require("neotest-python")({
-		-- 					dap = { justMyCode = false },
-		-- 					runner = "pytest",
-		-- 					python = vim.fn.exepath("python"),
-		-- 					pytest = "pdm run pytest",
-		-- 				}),
-		-- 			},
-		-- 		})
-		-- 	end,
-		-- },
-		-- { "nvim-neotest/neotest-python" },
 
 		{
 			"epwalsh/obsidian.nvim",
@@ -152,8 +102,6 @@ require("lazy").setup({
 			dependencies = {
 				-- Required.
 				"nvim-lua/plenary.nvim",
-
-				-- see below for full list of optional dependencies 👇
 			},
 			opts = {
 				workspaces = {
@@ -162,49 +110,8 @@ require("lazy").setup({
 						path = "~/notes",
 					},
 				},
-
-				-- see below for full list of options 👇
 			},
 		},
-		-- {
-		-- 	"nvim-treesitter/nvim-treesitter-textobjects",
-		-- 	dependencies = "nvim-treesitter/nvim-treesitter",
-		-- 	after = "nvim-treesitter/nvim-treesitter",
-		-- 	config = function()
-		-- 		require("nvim-treesitter.configs").setup({
-		-- 			textobjects = {
-		-- 				select = {
-		-- 					enable = true,
-		-- 					lookahead = true,
-		-- 					keymaps = {
-		-- 						["af"] = "@function.outer",
-		-- 						["if"] = "@function.inner",
-		-- 						["ac"] = "@class.outer",
-		-- 						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-		-- 						["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-		-- 						-- Custom capture
-		-- 						["aF"] = "@custom_capture",
-		-- 					},
-		-- 					selection_modes = {
-		-- 						["@parameter.outer"] = "v", -- charwise
-		-- 						["@function.outer"] = "V", -- linewise
-		-- 						["@class.outer"] = "<c-v>", -- blockwise
-		-- 					},
-		-- 					include_surrounding_whitespace = true,
-		-- 				},
-		-- 				swap = {
-		-- 					enable = true,
-		-- 					swap_next = {
-		-- 						["<leader>a"] = "@parameter.inner",
-		-- 					},
-		-- 					swap_previous = {
-		-- 						["<leader>A"] = "@parameter.inner",
-		-- 					},
-		-- 				},
-		-- 			},
-		-- 		})
-		-- 	end,
-		-- },
 		"bullets-vim/bullets.vim",
 		{
 			"cameron-wags/rainbow_csv.nvim",
@@ -258,17 +165,12 @@ require("lazy").setup({
 		"hrsh7th/cmp-buffer", -- Buffer completions
 		"hrsh7th/cmp-path", -- Path completions
 		"hrsh7th/cmp-cmdline", -- Command-line completions
-		-- "saadparwaiz1/cmp_luasnip", -- Snippet completions
-		-- "L3MON4D3/LuaSnip", -- Snippets plugin
 		"tpope/vim-eunuch",
 		-- Telescope
 		"nvim-lua/plenary.nvim", -- Lua functions used by various plugins
 		"ahmedkhalf/project.nvim",
 		{
 			"nvim-telescope/telescope.nvim", -- Fuzzy finder and more
-			-- config = function()
-			--   require("telescope.builtin").find_files { path_display = { "truncate" } }
-			-- end
 		},
 
 		{
@@ -294,21 +196,15 @@ require("lazy").setup({
 
 		"tpope/vim-fugitive",
 
-		--editing
-		--put back surround\
-
-		-- Looks
-		-- "rebelot/kanagawa.nvim", -- Theme
 		{
 			-- Theme inspired by Atom
 			"navarasu/onedark.nvim",
 			priority = 1000,
-			lazy = false,
+			lazy = true,
 			config = function()
 				require("onedark").setup({
-					-- Set a style preset. 'dark' is default.
 					style = "dark", -- dark, darker, cool, deep, warm, warmer, light
-					transparent = false,
+					transparent = true,
 				})
 				require("onedark").load()
 			end,
@@ -440,25 +336,12 @@ require("lspconfig").ruff.setup({
 })
 
 lspconfig.lua_ls.setup({})
--- Setup lspconfig with nvim-cmp capabilities
--- lspconfig.pyright.setup({
--- 	autostart = false,
--- })
---
--- }
---
--- vim.lsp.set_log_level("debug")
 lspconfig.pylsp.setup({})
 local cmp = require("cmp")
 -- local luasnip = require("luasnip")
 
 -- Setup nvim-cmp
 cmp.setup({
-	-- snippet = {
-	-- 	expand = function(args)
-	-- 		luasnip.lsp_expand(args.body)
-	-- 	end,
-	-- },
 	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
