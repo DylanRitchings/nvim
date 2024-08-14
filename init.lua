@@ -11,11 +11,26 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	})
 end
 
+function GetPdmVenvPath()
+	local handle = io.popen("pdm venv list | grep 'in-project' | awk '{print $3}'")
+	local result = handle:read("*a")
+	handle:close()
+
+	-- Remove trailing newline
+	result = result:gsub("[\n\r]", "")
+
+	if result ~= "" then
+		return result
+	else
+		return nil
+	end
+end
+
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pylsp"
 vim.g.lazyvim_python_ruff = "ruff"
 
 -- local function get_pdm_python_path()
@@ -43,7 +58,14 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.python" },
 		opts = {
 			adapters = {
-				["neotest-python"] = {},
+				["neotest-python"] = {
+					dap = { justMyCode = false },
+					runner = "pytest",
+					python = GetPdmVenvPath,
+					args = { "--no-cov" },
+					pytest_discover_instances = true,
+					-- python = ".venv/bin/python",
+				},
 			},
 			settings = {
 				options = {
@@ -59,40 +81,34 @@ require("lazy").setup({
 		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 		"williamboman/mason.nvim", -- LSP server installer
 		"stsewd/isort.nvim",
-		{
-			"mfussenegger/nvim-dap-python",
-			config = function()
-				-- Function to get the correct Python path
-				local function get_python_path()
-					local venv_path = os.getenv("VIRTUAL_ENV")
-					if venv_path then
-						return venv_path .. "/Scripts/python.exe"
-					end
-					return vim.fn.expand("C:/Users/dylan.ritchings/scoop/apps/python/current/python.exe")
-				end
-
-				-- Setup nvim-dap-python with the correct Python path
-				local path = get_python_path()
-				require("dap-python").setup(path)
-				require("dap-python").test_runner = "pytest"
-
-				-- Debug prints to verify configuration
-				print("Python path: " .. path)
-				print("Test runner set to: " .. require("dap-python").test_runner)
-
-				-- Key mappings for debugging
-				vim.keymap.set("n", "<leader>dtm", function()
-					require("dap-python").test_method()
-				end, { desc = "Debug Test Method" })
-				vim.keymap.set("n", "<leader>dtc", function()
-					require("dap-python").test_class()
-				end, { desc = "Debug Test Class" })
-				vim.keymap.set("n", "<leader>dtf", function()
-					require("dap-python").test_file()
-				end, { desc = "Debug Test File" })
-			end,
-		},
-
+		-- {
+		-- 	"mfussenegger/nvim-dap-python",
+		-- 	config = function()
+		-- 		-- Function to get the correct Python path
+		--
+		-- 		-- Setup nvim-dap-python with the correct Python path
+		-- 		local path = GetPdmVenvPath()
+		-- 		require("dap-python").setup(path .. "\\Scripts\\pythonw.exe")
+		-- 		-- require("dap-python").setup(path)
+		-- 		require("dap-python").test_runner = "pytest"
+		--
+		-- 		-- Debug prints to verify configuration
+		-- 		print("Python path: " .. path)
+		-- 		print("Test runner set to: " .. require("dap-python").test_runner)
+		-- 		--
+		-- 		-- -- Key mappings for debugging
+		-- 		-- vim.keymap.set("n", "<leader>dtm", function()
+		-- 		-- 	require("dap-python").test_method()
+		-- 		-- end, { desc = "Debug Test Method" })
+		-- 		-- vim.keymap.set("n", "<leader>dtc", function()
+		-- 		-- 	require("dap-python").test_class()
+		-- 		-- end, { desc = "Debug Test Class" })
+		-- 		-- vim.keymap.set("n", "<leader>dtf", function()
+		-- 		-- 	require("dap-python").test_file()
+		-- 		-- end, { desc = "Debug Test File" })
+		-- 	end,
+		-- },
+		--
 		{
 			"epwalsh/obsidian.nvim",
 			version = "*",
@@ -135,14 +151,13 @@ require("lazy").setup({
 
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			-- build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 		},
 
 		-- Looks
 		-- "rebelot/kanagawa.nvim", -- Theme
 
 		"elentok/format-on-save.nvim",
-		-- "mfussenegger/nvim-dap",
 		"folke/lazydev.nvim",
 		"sharkdp/fd",
 		{
@@ -231,10 +246,17 @@ require("lazy").setup({
 				},
 			},
 		},
+		{
+			"stevearc/oil.nvim",
+			opts = {},
+			-- Optional dependencies
+			dependencies = { { "echasnovski/mini.icons", opts = {} } },
+			-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+		},
 	},
 })
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-	vim.opt.shell = "C:/msys64/msys2_shell.cmd"
+	vim.opt.shell = "bash"
 	vim.opt.shellcmdflag = "-c"
 	vim.opt.shellxquote = ""
 	vim.opt.shellslash = true
@@ -324,12 +346,12 @@ require("telescope").setup({
 -- LSP settings
 local lspconfig = require("lspconfig")
 -- Configure LSP
-local on_attach = function(client, bufnr)
-	if client.name == "ruff" then
-		-- Disable hover in favor of Pyright
-		client.server_capabilities.hoverProvider = false
-	end
-end
+-- local on_attach = function(client, bufnr)
+-- 	if client.name == "ruff" then
+-- 		-- Disable hover in favor of Pyright
+-- 		client.server_capabilities.hoverProvider = false
+-- 	end
+-- end
 
 require("lspconfig").ruff.setup({
 	on_attach = on_attach,
@@ -367,7 +389,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	end,
 })
 
-vim.fn.system("pdm info --packages")
+-- vim.fn.system("pdm info --packages")
 
 -- Scroll down half a screen and keep cursor in the middle
 vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true })
@@ -387,3 +409,6 @@ vim.opt.showbreak = ">> "
 -- Avoid breaking words when wrapping lines
 vim.opt.linebreak = true
 vim.o.linebreak = true
+
+-- vim.cmd("set verbosefile=~/.config/nvim/log")
+-- vim.cmd("set verbose=15")
