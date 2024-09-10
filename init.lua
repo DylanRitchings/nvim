@@ -22,8 +22,6 @@ require("config.lazy")
 
 require("lazy").setup("plugins")
 
-
-
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
   vim.opt.shell = "bash"
   vim.opt.shellcmdflag = "-c"
