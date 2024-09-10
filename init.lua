@@ -106,7 +106,7 @@ wk.add({
   { "<leader>oh", "<cmd>Oil ~<cr>",                             desc = "Oil in home directory" },
   { "<leader>oD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
   { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
-
+  { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",              desc = "Oil in notes" },
 
   -- RUN
   { "<leader>r",  group = "Run" },
