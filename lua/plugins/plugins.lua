@@ -11,6 +11,19 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+		opts = function(_, opts)
+			local telescope = require("telescope")
+
+			opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+				path_display = { "truncate" },
+				layout_config = {
+					width = 0.95,
+					height = 0.85,
+				},
+			})
+
+			return opts
+		end,
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	"nvim-telescope/telescope-fzf-native.nvim",
@@ -110,4 +123,8 @@ return {
 
 	"nvim-tree/nvim-web-devicons",
 	"lewis6991/gitsigns.nvim",
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 }

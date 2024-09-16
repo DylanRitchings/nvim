@@ -230,3 +230,5 @@ require("gitsigns").setup({
 		delay = 0,
 	},
 })
+
+require("lualine").setup()
