@@ -1,4 +1,5 @@
 ROOT_DIR = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+
 function GetPdmVenvPath()
   local handle = io.popen("pdm venv list | grep 'in-project' | awk '{print $3}'")
   local result = handle:read("*a")
@@ -67,7 +68,6 @@ function OpenExplorer()
   vim.fn.jobstart(cmd, { detach = true })
 end
 
-<<<<<<< HEAD
 -- local function toggle_comment()
 --   local line_comment = vim.bo.commentstring:match('^(.*)%%s') or '//'
 --   local start_line = vim.fn.line("'<")
@@ -92,19 +92,6 @@ vim.api.nvim_create_user_command("CopyRelPath", function()
   vim.fn.setreg('+', vim.fn.expand('%'))
 end, {})
 
-=======
-vim.keymap.set("n", "s", "<Nop>", { noremap = true })
-vim.keymap.set("x", "s", "<Nop>", { noremap = true })
-
-require("mini.ai").setup()
-require("mini.basics").setup()
-require("mini.bufremove").setup()
-require("mini.comment").setup()
-require("mini.pairs").setup()
-require("mini.icons").setup()
-local mini_surround = require("mini.surround")
-mini_surround.setup()
->>>>>>> 4a8aa14 (mac)
 local wk = require("which-key")
 local ts = require("telescope.builtin")
 -- local test = require("neotest")
@@ -170,7 +157,6 @@ wk.add({
   { "<leader>bn", "<cmd>bnext<cr>",                                            desc = "Next buffer" },
   { "<leader>bp", "<cmd>bprevious<cr>",                                        desc = "Previous buffer" },
 
-<<<<<<< HEAD
   -- OPEN
   { "<leader>o",  group = "open" },
   {
@@ -238,35 +224,6 @@ wk.add({
   { "<leader>wL", "<C-w>L",                                     desc = "Move window to far right" },
   { "<leader>wd", "<C-w>c",                                     desc = "Close window" },
   { "<leader>ww", "<C-w>w",                                     desc = "Go to next window" },
-=======
-	-- WINDOW MANAGEMENT
-	{ "<leader>w", group = "Window" },
-	{ "<leader>wh", "<C-w>h", desc = "Move to left window" },
-	{ "<leader>wj", "<C-w>j", desc = "Move to bottom window" },
-	{ "<leader>wk", "<C-w>k", desc = "Move to top window" },
-	{ "<leader>wl", "<C-w>l", desc = "Move to right window" },
-	{ "<leader>w<", "<C-w><", desc = "Decrease width" },
-	{ "<leader>w>", "<C-w>>", desc = "Increase width" },
-	{ "<leader>w-", "<C-w>-", desc = "Decrease height" },
-	{ "<leader>w+", "<C-w>+", desc = "Increase height" },
-	{ "<leader>w=", "<C-w>=", desc = "Equalize window sizes" },
-	{ "<leader>ws", "<C-w>s", desc = "Split window horizontally" },
-	{ "<leader>wv", "<C-w>v", desc = "Split window vertically" },
-	{ "<leader>wq", "<C-w>q", desc = "Close window" },
-	{ "<leader>wo", "<C-w>o", desc = "Close other windows" },
-	{ "<lader>wT", "<C-w>T", desc = "Move window to new tab" },
-	{ "<leader>wx", "<C-w>x", desc = "Swap with next window" },
-	{ "<leader>wH", "<C-w>H", desc = "Move window to far left" },
-	{ "<leader>wJ", "<C-w>J", desc = "Move window to very bottom" },
-	{ "<leader>wK", "<C-w>K", desc = "Move window to very top" },
-	{ "<leader>wL", "<C-w>L", desc = "Move window to far right" },
-	{ "<leader>wd", "<C-w>c", desc = "Close window" },
-	{ "<leader>ww", "<C-w>w", desc = "Go to next window" },
-
-	-- { "sa", mini_surround.add, desc = "Add surrounding" },
-	-- { "sd", mini_surround.delete, desc = "Delete surrounding" },
-	-- { "sr", mini_surround.replace, desc = "Replace surrounding" },
->>>>>>> 4a8aa14 (mac)
 })
 
 -- compile latex on save
