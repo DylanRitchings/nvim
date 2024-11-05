@@ -51,6 +51,7 @@ return {
           "docker_compose_language_service",
           "dockerls",
           "hydra_lsp",
+          "mypy",
           -- "terraformls",
           "sqlls",
           "bashls",

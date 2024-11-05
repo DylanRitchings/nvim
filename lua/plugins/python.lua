@@ -1,15 +1,15 @@
-local function get_venv_in_repo_root()
-  local util = require("lspconfig.util")
-  local root = util.find_git_ancestor(vim.fn.getcwd())
-  if root then
-    local venv_path = root .. "/.venv"
-    if vim.fn.isdirectory(venv_path) == 1 then
-      return venv_path
-    end
-  end
-  return nil
-end
-require("dap-python").setup(get_venv_in_repo_root() or vim.fn.exepath("python"))
+-- local function get_venv_in_repo_root()
+--   local util = require("lspconfig.util")
+--   local root = util.find_git_ancestor(vim.fn.getcwd())
+--   if root then
+--     local venv_path = root .. "/.venv"
+--     if vim.fn.isdirectory(venv_path) == 1 then
+--       return venv_path
+--     end
+--   end
+--   return nil
+-- end
+-- require("dap-python").setup(get_venv_in_repo_root() or vim.fn.exepath("python"))
 
 return {
 
@@ -22,11 +22,12 @@ return {
       "mfussenegger/nvim-dap",
     },
     -- branch = "regexp",
+    lazy = true,
     opts = {
       stay_on_this_version = true,
       name = {
-        "venv",
         ".venv",
+        "venv",
         "env",
         ".env",
       },
@@ -37,7 +38,6 @@ return {
       { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" },
     },
   },
-
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -45,12 +45,28 @@ return {
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python"
     },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-python")({
+            dap = { justMyCode = false },
+            args = { "--log-level", "DEBUG" },
+            python = function()
+              return require("venv-selector").get_active_path()
+            end,
+            pytest_discover_instances = true,
+            runner = "pytest"
+          }),
+        },
+      })
+    end,
     keys = {
       {
         "<leader>tt",
         function()
-          require("neotest").run.run()
+          require("neotest").run.run({ strategy = 'dap' })
         end,
         desc = "Run nearest test",
       },
@@ -96,28 +112,28 @@ return {
     end,
     keys = {
       {
-        "<leader>db",
+        "<leader>tb",
         function()
           require("dap").toggle_breakpoint()
         end,
         desc = "Toggle Breakpoint",
       },
       {
-        "<leader>dc",
+        "<leader>tc",
         function()
           require("dap").continue()
         end,
         desc = "Start/Continue",
       },
       {
-        "<leader>di",
+        "<leader>ti",
         function()
           require("dap").step_into()
         end,
         desc = "Step Into",
       },
       {
-        "<leader>do",
+        "<leader>to",
         function()
           require("dap").step_over()
         end,
@@ -133,4 +149,6 @@ return {
       ensure_installed = { "python" },
     },
   },
+  
+
 }

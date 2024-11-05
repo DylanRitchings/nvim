@@ -13,15 +13,35 @@ return {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
       local telescope = require("telescope")
-
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         path_display = { "truncate" },
         layout_config = {
           width = 0.95,
           height = 0.85,
         },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden" -- Add this to search hidden files
+        },
       })
-
+      
+      opts.pickers = {
+        find_files = {
+          hidden = true -- This will allow find_files to show hidden files
+        },
+        live_grep = {
+          additional_args = function()
+            return {"--hidden"}
+          end
+        }
+      }
+  
       return opts
     end,
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -50,23 +70,23 @@ return {
       },
     },
   },
-  {
-    "stevearc/conform.nvim",
-    opts = {},
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          -- Conform will run multiple formatters sequentially
-          python = { "isort", "black" },
-        },
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_format = "fallback",
-        },
-      })
-    end,
-  },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   opts = {},
+  --   config = function()
+  --     require("conform").setup({
+  --       formatters_by_ft = {
+  --         lua = { "stylua" },
+  --         -- Conform will run multiple formatters sequentially
+  --         python = { "isort" },
+  --       },
+  --       format_on_save = {
+  --         timeout_ms = 500,
+  --         lsp_format = "fallback",
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "echasnovski/mini.nvim",
     version = "*",

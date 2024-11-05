@@ -14,12 +14,18 @@ function GetPdmVenvPath()
     return nil
   end
 end
-
+vim.opt.mouse = 'a'
 vim.env.GIT_WORK_TREE = vim.fn.getcwd()
 vim.env.GIT_DIR = vim.fn.getcwd() .. "/.git"
 
 vim.g.mapleader = " "
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pyright"
+
+
+vim.g.loaded_python3_provider = nil
+vim.g.python3_host_prog = '/c/Program Files/Python312/python'
+
+vim.cmd('runtime provider/python3.vim')
 
 require("config.lazy")
 
@@ -62,25 +68,69 @@ function OpenExplorer()
   vim.fn.jobstart(cmd, { detach = true })
 end
 
+-- local function toggle_comment()
+--   local line_comment = vim.bo.commentstring:match('^(.*)%%s') or '//'
+--   local start_line = vim.fn.line("'<")
+--   local end_line = vim.fn.line("'>")
+--
+--   for line = start_line, end_line do
+--     local current_line = vim.fn.getline(line)
+--     if current_line:match("^%s*" .. line_comment) then
+--       vim.cmd(line .. "s/^\\(\\s*\\)" .. line_comment .. "/\\1/")
+--     else
+--       vim.cmd(line .. "s/^/" .. line_comment .. "/")
+--     end
+--   end
+-- end
+--
+
 -- local function open_neogit_with_cwd()
 --   local cwd = vim.fn.getcwd()
 --   vim.cmd("Neogit cwd=" .. cwd)
 -- end
+vim.api.nvim_create_user_command("CopyRelPath", function()
+  vim.fn.setreg('+', vim.fn.expand('%'))
+end, {})
 
 local wk = require("which-key")
 local ts = require("telescope.builtin")
+-- local test = require("neotest")
 -- local git = require("neogit")
 wk.add({
-  { "<leader>l",    "<cmd>Lazy<cr>",                desc = "Manage plugins" },
+
+  { "<leader>m",    group = "Manage" },
+  { "<leader>ml",    "<cmd>Lazy<cr>",                desc = "Manage plugins" },
+  { "<leader>mm",    "<cmd>Mason<cr>",                desc = "Manage LSP" },
+
 
   { "<leader><cr>", ex_in_dir(ts.git_files),        desc = "Search whole repo" },
   { "<leader>.",    ex_in_dir(ts.find_files),       desc = "Search current dir" },
   { "<leader>/",    "<cmd>Telescope live_grep<cr>", desc = "Live grep in root" },
 
+  --DIRECTORY
+  { "<leader>d",    group = "directory" },
+  {
+    "<leader>dg",
+    function()
+      ts.live_grep({ cwd = vim.fn.expand("%:p:h") })
+    end,
+    desc = "Live grep in current dir",
+  },
+  --TEST
+
+  -- { "<leader>t",    group = "test" },
+  -- { "<leader>tt",   test.run.run(),       desc = "Search current dir" },
+
   -- FILES
   { "<leader>f",    group = "file" },
   { "<leader>ff",   ex_in_dir(ts.find_files),       desc = "Search current dir" },
   -- { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep in root" },
+
+  -- RUN
+  { "<leader>r",  group = "Run" },
+  { "<leader>rp", "<cmd>Telescope oldfiles<cr>",                               desc = "Recent files" },
+
+  
   {
     "<leader>fg",
     function()
@@ -89,6 +139,7 @@ wk.add({
     desc = "Live grep in current dir",
   },
   { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                               desc = "Recent files" },
+  { "<leader>fp", "<cmd>CopyRelPath<cr>",                               desc = "Copy current file path" },
   -- { "<leader>fm",   ":Move ",                                                    desc = "Move/Rename current file" },
   { "<leader>fc", "<cmd>edit " .. vim.fn.stdpath("config") .. "/init.lua<cr>", desc = "Config" },
 
@@ -97,6 +148,7 @@ wk.add({
   { "<leader>pf", "<cmd>Telescope find_files<cr>",                             desc = "Search repo" },
   { "<leader>pg", "<cmd>Telescope live_grep<cr>",                              desc = "Grep project" },
 
+  
   -- BUFFERS
   { "<leader>`",  "<c-^>",                                                     desc = "Switch to last buffer" },
   { "<leader>b",  group = "Buffers" },
@@ -124,12 +176,10 @@ wk.add({
   { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
   { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
 
-  -- RUN
-  { "<leader>r",  group = "Run" },
-  { "<leader>rT", require("dap-python").test_method,            desc = "Debug Test Method" },
+  -- { "<leader>rT", require("dap-python").test_method,            desc = "Debug Test Method" },
 
   -- Move this
-  { "<leader>rd", "<cmd> lua vim.diagnostic.open_float() <CR>", desc = "Open float" },
+  -- { "<leader>rd", "<cmd> lua vim.diagnostic.open_float() <CR>", desc = "Open float" },
 
   -- GIT
   { "<leader>g",  group = "Git" },
@@ -150,7 +200,7 @@ wk.add({
   { "<leader>ck", vim.diagnostic.open_float,                    desc = "Show diagnostics" },
   { "<leader>cn", vim.diagnostic.goto_next,                     desc = "Next diagnostic" },
   { "<leader>cp", vim.diagnostic.goto_prev,                     desc = "Previous diagnostic" },
-
+  -- { "<leader>cc", toggle_comment(),                             desc = "Toggle comment" },
   -- WINDOW MANAGEMENT
   { "<leader>w",  group = "Window" },
   { "<leader>wh", "<C-w>h",                                     desc = "Move to left window" },
@@ -229,3 +279,63 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 require("lualine").setup()
 
+vim.lsp.buf.format({ timeout_ms = 10000 })
+local function open_cdk_docs()
+  local word = vim.fn.expand("<cword>")
+  local url = "https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/" .. word .. ".html"
+  local cmd = ""
+
+  if vim.fn.has("mac") == 1 then
+    cmd = "open"
+  elseif vim.fn.has("unix") == 1 then
+    cmd = "xdg-open"
+  elseif vim.fn.has("win32") == 1 then
+    cmd = "start"
+  end
+
+  if cmd ~= "" then
+    vim.fn.system(cmd .. " " .. url)
+  else
+    print("Unsupported operating system")
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>co', ':lua open_cdk_docs()<CR>', { noremap = true, silent = true })
+
+
+
+
+
+local function telescope_grep_and_replace()
+  -- Use Telescope for live_grep
+  require('telescope.builtin').live_grep({
+    prompt_title = "Live Grep (for replace)",
+    attach_mappings = function(prompt_bufnr, map)
+      -- Override the default 'enter' key to send results to quickfix
+      map('i', '<CR>', function()
+        require('telescope.actions').send_to_qflist(prompt_bufnr)
+        require('telescope.actions').close(prompt_bufnr)
+        
+        -- Prompt for search and replace terms
+        vim.ui.input({prompt = "Search term: "}, function(search_term)
+          if search_term then
+            vim.ui.input({prompt = "Replace with: "}, function(replace_term)
+              if replace_term then
+                -- Perform the substitution
+                vim.cmd('cdo s/' .. search_term .. '/' .. replace_term .. '/g | update')
+                print("Replacement complete!")
+              end
+            end)
+          end
+        end)
+      end)
+      return true
+    end,
+  })
+end
+
+-- Set up a command to call this function
+vim.api.nvim_create_user_command('TelescopeGrepAndReplace', telescope_grep_and_replace, {})
+
+-- Optionally, set up a keybinding
+vim.keymap.set('n', '<leader>pr', telescope_grep_and_replace, { noremap = true, silent = true })
