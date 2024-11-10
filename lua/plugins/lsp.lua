@@ -51,7 +51,7 @@ return {
           "docker_compose_language_service",
           "dockerls",
           "hydra_lsp",
-          "mypy",
+          -- "mypy",
           -- "terraformls",
           "sqlls",
           "bashls",
@@ -145,14 +145,13 @@ return {
           "lua", "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
           "python", "markdown", "markdown_inline", "bash", "powershell", "yaml", "org",
           "git_config", "git_rebase", "gitignore", "gitcommit", "gitattributes", "diff",
-          "json", "make", "editorconfig" },
+          "json", "make", "editorconfig", "hjson", "http" },
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
       })
     end
   },
-
 }
 
 -- let g:markdown_fenced_languages = ['html', 'python', 'lua', 'vim', 'typescript', 'javascript']

@@ -1,15 +1,3 @@
--- local function get_venv_in_repo_root()
---   local util = require("lspconfig.util")
---   local root = util.find_git_ancestor(vim.fn.getcwd())
---   if root then
---     local venv_path = root .. "/.venv"
---     if vim.fn.isdirectory(venv_path) == 1 then
---       return venv_path
---     end
---   end
---   return nil
--- end
--- require("dap-python").setup(get_venv_in_repo_root() or vim.fn.exepath("python"))
 
 return {
 
@@ -142,13 +130,5 @@ return {
     },
   },
 
-  -- Treesitter for better syntax highlighting
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = { "python" },
-    },
-  },
-  
 
 }

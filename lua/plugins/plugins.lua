@@ -52,24 +52,24 @@ return {
     event = "VeryLazy",
   },
 
-  {
-    "epwalsh/obsidian.nvim",
-    version = "*",
-    lazy = true,
-    ft = "markdown",
-
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      workspaces = {
-        {
-          name = "notes",
-          path = "~/dev/notes",
-        },
-      },
-    },
-  },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   version = "*",
+  --   lazy = true,
+  --   ft = "markdown",
+  --
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   opts = {
+  --     workspaces = {
+  --       {
+  --         name = "notes",
+  --         path = "~/dev/notes",
+  --       },
+  --     },
+  --   },
+  -- },
   -- {
   --   "stevearc/conform.nvim",
   --   opts = {},
@@ -91,13 +91,27 @@ return {
     "echasnovski/mini.nvim",
     version = "*",
     config = function()
+
       require("mini.ai").setup()
       require("mini.basics").setup()
       require("mini.bufremove").setup()
       require("mini.comment").setup()
       require("mini.pairs").setup()
-      require("mini.surround").setup()
       require("mini.icons").setup()
+      -- require("mini.surround").setup({
+      -- mappings = {
+      --   add = '<leader>sa',             -- Add surrounding in Normal and Visual modes
+      --   delete = '<leader>sd',          -- Delete surrounding
+      --   find = '<leader>sf',            -- Find surrounding (to the right)
+      --   find_left = '<leader>sF',       -- Find surrounding (to the left)
+      --   highlight = '<leader>sh',       -- Highlight surrounding
+      --   replace = '<leader>sr',         -- Replace surrounding
+      --   update_n_lines = '<leader>sn',  -- Update `n_lines`
+      --
+      --   suffix_last = 'l',      -- Suffix to search with "prev" method
+      --   suffix_next = 'n',      -- Suffix to search with "next" method
+      -- }
+      -- })
       -- Add other mini modules you want to use
     end,
   },
@@ -126,6 +140,10 @@ return {
       enabled = true,
     },
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
   },
   -- {
   -- 	"NeogitOrg/neogit",
@@ -176,4 +194,12 @@ return {
       -- Your vim-gitgutter configuration here
     end
   },
+  {
+      "kylechui/nvim-surround",
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+          require("nvim-surround").setup()
+      end
+  }
 }
