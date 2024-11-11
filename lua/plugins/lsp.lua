@@ -142,7 +142,7 @@ return {
 
       configs.setup({
         ensure_installed = {
-          "lua", "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
+          "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
           "python", "markdown", "markdown_inline", "bash", "powershell", "yaml", "org",
           "git_config", "git_rebase", "gitignore", "gitcommit", "gitattributes", "diff",
           "json", "make", "editorconfig", "hjson", "http" },

@@ -7,6 +7,13 @@ vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 
+-- Resizing keymaps using Control + . , - =
+-- Use Control + h/j/k/l to resize windows
+vim.keymap.set("n", "<C-l>", "<C-w><", { desc = "Decrease width", silent = true })
+vim.keymap.set("n", "<C-h>", "<C-w>>", { desc = "Increase width", silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>-", { desc = "Decrease height", silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true })
+
 local utils = require("config.utils")
 local wk = require("which-key")
 local ts = require("telescope.builtin")
@@ -125,12 +132,8 @@ wk.add({
   { "<leader>wj", "<C-w>j",                                     desc = "Move to bottom window" },
   { "<leader>wk", "<C-w>k",                                     desc = "Move to top window" },
   { "<leader>wl", "<C-w>l",                                     desc = "Move to right window" },
-  { "<leader>w<", "<C-w><",                                     desc = "Decrease width" },
-  { "<leader>w>", "<C-w>>",                                     desc = "Increase width" },
-  { "<leader>w-", "<C-w>-",                                     desc = "Decrease height" },
-  { "<leader>w+", "<C-w>+",                                     desc = "Increase height" },
   { "<leader>w=", "<C-w>=",                                     desc = "Equalize window sizes" },
-  { "<leader>ws", "<C-w>s",                                     desc = "Split window horizontally" },
+  { "<leader>wh", "<C-w>s",                                     desc = "Split window horizontally" },
   { "<leader>wv", "<C-w>v",                                     desc = "Split window vertically" },
   { "<leader>wq", "<C-w>q",                                     desc = "Close window" },
   { "<leader>wo", "<C-w>o",                                     desc = "Close other windows" },

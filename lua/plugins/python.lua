@@ -1,7 +1,7 @@
 
 return {
 
-  -- Virtual environment management
+  -- virtual environment management
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = {
@@ -23,54 +23,9 @@ return {
       auto_refresh = true,
     },
     keys = {
-      { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" },
+      { "<leader>cv", "<cmd>:venvselect<cr>", desc = "select virtualenv" },
     },
   },
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-python"
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-python")({
-            dap = { justMyCode = false },
-            args = { "--log-level", "DEBUG" },
-            python = function()
-              return require("venv-selector").get_active_path()
-            end,
-            pytest_discover_instances = true,
-            runner = "pytest"
-          }),
-        },
-      })
-    end,
-    keys = {
-      {
-        "<leader>tt",
-        function()
-          require("neotest").run.run({ strategy = 'dap' })
-        end,
-        desc = "Run nearest test",
-      },
-      {
-        "<leader>tf",
-        function()
-          require("neotest").run.run(vim.fn.expand("%"))
-        end,
-        desc = "Run current file",
-      },
-    },
-  },
-
-
-
-  -- Debugging
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -104,31 +59,96 @@ return {
         function()
           require("dap").toggle_breakpoint()
         end,
-        desc = "Toggle Breakpoint",
+        desc = "toggle breakpoint",
       },
       {
         "<leader>tc",
         function()
           require("dap").continue()
         end,
-        desc = "Start/Continue",
+        desc = "start/continue",
       },
       {
         "<leader>ti",
         function()
           require("dap").step_into()
         end,
-        desc = "Step Into",
+        desc = "step into",
       },
       {
         "<leader>to",
         function()
           require("dap").step_over()
         end,
-        desc = "Step Over",
+        desc = "step over",
       },
     },
   },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/fixcursorhold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python"
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-python")({
+            dap = { justmycode = true },
+            args = { "--log-level", "debug" },
+            -- python = function()
+            --   return require("venv-selector").get_active_path()
+            -- end,
+            pytest_discover_instances = true,
+            runner = "pytest"
+          }),
+        },
+      })
+    end,
+    keys = {
+      {
+        "<leader>tt",
+        function()
+          require("neotest").run.run()
+        end,
+        desc = "run nearest test",
+      },
+      {
+        "<leader>td",
+        function()
+          require("neotest").run.run({ strategy = 'dap' })
+        end,
+        desc = "debug nearest test",
+      },
+      {
+        "<leader>tf",
+        function()
+          require("neotest").run.run(vim.fn.expand("%"))
+        end,
+        desc = "run current file",
+      },
+      {
+        "<leader>ta",
+        function()
+          require("neotest").run.attach()
+        end,
+        desc = "test attach",
+      },
+      {
+        "<leader>tw",
+        function()
+          require("neotest").watch.toggle(vim.fn.expand("%"))
+        end,
+        desc = "watch tests in file",
+      },
+    },
+  },
+
+
+
 
 
 }
