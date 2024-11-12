@@ -53,7 +53,7 @@ return {
           "docker_compose_language_service",
           "dockerls",
           "hydra_lsp",
-          "mypy",
+          -- "mypy",
           -- "terraformls",
           "sqlls",
           "bashls",
@@ -140,21 +140,24 @@ return {
     build = ":TSUpdate",
     config = function()
       local configs = require("nvim-treesitter.configs")
-      require("nvim-treesitter.install").compilers = { "zig" }
-
+      require("nvim-treesitter.install").prefer_git = false
+      require("nvim-treesitter.install").compilers = { vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl", "zig" }
       configs.setup({
+
         ensure_installed = {
-          "lua", "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
+          "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
           "python", "markdown", "markdown_inline", "bash", "powershell", "yaml", "org",
           "git_config", "git_rebase", "gitignore", "gitcommit", "gitattributes", "diff",
-          "json", "make", "editorconfig" },
+          "json", "make", "editorconfig", "hjson", "http" },
+        auto_install= false,
         sync_install = false,
+        ignore_install = {},
         highlight = { enable = true },
         indent = { enable = true },
+        modules = {},
       })
     end
   },
-
 }
 
 -- let g:markdown_fenced_languages = ['html', 'python', 'lua', 'vim', 'typescript', 'javascript']
