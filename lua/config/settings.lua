@@ -7,6 +7,7 @@ ROOT_DIR = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
 vim.o.timeout = true
 vim.o.timeoutlen = 0
 vim.opt.clipboard:append("unnamedplus")
+vim.g.neovide_input_macos_alt_is_meta = true
 
 vim.opt.relativenumber = true
 vim.opt.number = true

@@ -13,6 +13,8 @@ vim.keymap.set("n", "<C-l>", "<C-w><", { desc = "Decrease width", silent = true 
 vim.keymap.set("n", "<C-h>", "<C-w>>", { desc = "Increase width", silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>-", { desc = "Decrease height", silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true })
+vim.keymap.set("n", "<M-j>", ":cn<CR>", { desc = "Goto next quickfix", silent = true })
+vim.keymap.set("n", "<M-k>", ":cp<CR>", { desc = "Goto previous quickfix", silent = true })
 
 local utils = require("config.utils")
 local wk = require("which-key")
@@ -22,8 +24,8 @@ local ts = require("telescope.builtin")
 wk.add({
 
   { "<leader>m",    group = "Manage" },
-  { "<leader>ml",    "<cmd>Lazy<cr>",                desc = "Manage plugins" },
-  { "<leader>mm",    "<cmd>Mason<cr>",                desc = "Manage LSP" },
+  { "<leader>mp",    "<cmd>Lazy<cr>",                desc = "Manage plugins" },
+  { "<leader>ml",    "<cmd>Mason<cr>",                desc = "Manage LSP" },
 
 
   { "<leader><cr>", utils.ex_in_dir(ts.git_files),        desc = "Search whole repo" },

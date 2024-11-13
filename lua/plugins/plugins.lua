@@ -9,7 +9,8 @@ return {
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
-  {
+  { 
+    
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
       local telescope = require("telescope")
@@ -120,13 +121,22 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
+      constrain_cursor = "name",
+      delete_to_trash = true,
       default_file_explorer = true,
+
+      lsp_file_methods = {
+        enabled = true,
+      },
+
       view_options = {
         show_hidden = true,
       },
+
       keymaps = {
         ["q"] = "actions.close",
         ["<BS>"] = "actions.parent",
+        ["gx"] = "actions.open_external",
       },
     },
     -- Optional dependencies
@@ -211,5 +221,24 @@ return {
         date_format = "%d-%m-%Y %H:%M:%S", -- template for the date, check Date format section for more options
         virtual_text_coklumn = 1,  -- virtual text start column, check Start virtual text at column section for more options
     },
+    -- {
+    --   "easymotion/vim-easymotion",
+    --   opts = {
+    --     EasyMotion_leader_key = '<Leader>',
+    --     EasyMotion_use_upper = 1,
+    --     EasyMotion_smartcase = 1,
+    --     EasyMotion_use_smartsign_us = 1
+    --   },
+    -- }
+    {
+        'smoka7/hop.nvim',
+        version = "*",
+        opts = {
+            keys = 'etovxqpdygfblzhckisuran'
+        }
+    },
+    {
+      "kevinhwang91/nvim-bqf"
+    }
   }
 }
