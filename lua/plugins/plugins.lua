@@ -9,6 +9,49 @@ return {
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
+  {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+      },
+      opts = {
+       window = {
+        position = "left",
+        width = 40,
+        mapping_options = {
+          noremap = true,
+          nowait = true,
+        },
+        mappings = {
+          ["<enter>"] = { 
+            "toggle_node", 
+            nowait = false, 
+          },
+          ["<space>"] = false  
+        }
+      },
+    }
+  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   opts = {
+  --     sort = {
+  --       sorter = "case_sensitive",
+  --     },
+  --     view = {
+  --       width = 30,
+  --     },
+  --     renderer = {
+  --       group_empty = true,
+  --     },
+  --     filters = {
+  --       dotfiles = true,
+  --     },
+  --   },
+  -- },
   { 
     
     "nvim-telescope/telescope.nvim",

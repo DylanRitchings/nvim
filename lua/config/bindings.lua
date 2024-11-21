@@ -16,6 +16,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true
 vim.keymap.set("n", "<M-j>", ":cn<CR>", { desc = "Goto next quickfix", silent = true })
 vim.keymap.set("n", "<M-k>", ":cp<CR>", { desc = "Goto previous quickfix", silent = true })
 
+
 local utils = require("config.utils")
 local wk = require("which-key")
 local ts = require("telescope.builtin")
@@ -28,10 +29,10 @@ wk.add({
   { "<leader>ml",    "<cmd>Mason<cr>",                desc = "Manage LSP" },
 
 
-  { "<leader><cr>", utils.ex_in_dir(ts.git_files),        desc = "Search whole repo" },
-  { "<leader>.",    utils.ex_in_dir(ts.find_files),       desc = "Search current dir" },
+  { "<leader><cr>", function() utils.ex_in_dir(ts.git_files) end,        desc = "Search whole repo" },
+  { "<leader>.",    function() utils.ex_in_dir(ts.find_files) end,       desc = "Search current dir" },
   -- { "<leader>/",    ts.find_files, desc = "Live grep in root" },
-  { "<leader>,",    utils.ex_in_dir(ts.live_grep), desc = "Live grep in root" },
+  { "<leader>,",    function() utils.ex_in_dir(ts.live_grep) end, desc = "Live grep in root" },
   { "<leader>.",    "<cmd>Telescope live_grep<cr>", desc = "Live grep in root" },
 
   -- --DIRECTORY
@@ -50,7 +51,7 @@ wk.add({
 
   -- FILES
   { "<leader>f",    group = "file" },
-  { "<leader>ff",   utils.ex_in_dir(ts.find_files),       desc = "Search current dir" },
+  { "<leader>ff",   function() utils.ex_in_dir(ts.find_files) end,       desc = "Search current dir" },
   -- { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep in root" },
 
   -- RUN
@@ -102,6 +103,7 @@ wk.add({
   { "<leader>oD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
   { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
   { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
+  { "<leader>ot", "<cmd>Neotree<cr>",                   desc = "Oil in notes" },
 
   -- { "<leader>rT", require("dap-python").test_method,            desc = "Debug Test Method" },
 
@@ -110,7 +112,10 @@ wk.add({
 
   -- GIT
   { "<leader>g",  group = "Git" },
-
+  { "<leader>gt", "<cmd>!git checkout --theirs %<cr>", desc = "Git checkout theirs" },
+  { "<leader>gm", "<cmd>!git checkout --mine %<cr>", desc = "Git checkout mine" },
+  { "<leader>gn", "<cmd>!git diff --name-only --diff-filter=U | head -n 1 | xargs -I {} vim {}<cr>", desc = "Go to next conflict in repo" },
+  { "<leader>gh", function() utils.open_github() end, desc = "Get GitHub link for current file"},
 
   -- LSP Navigation
   { "<leader>c",  group = "LSP" },

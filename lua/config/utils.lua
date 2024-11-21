@@ -13,11 +13,8 @@ function U.OpenExplorer()
   vim.fn.jobstart(cmd, { detach = true })
 end
 
-function U.open_cdk_docs()
-  local word = vim.fn.expand("<cword>")
-  local url = "https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/" .. word .. ".html"
+function U.open_browser(link)
   local cmd = ""
-
   if vim.fn.has("mac") == 1 then
     cmd = "open"
   elseif vim.fn.has("unix") == 1 then
@@ -27,10 +24,48 @@ function U.open_cdk_docs()
   end
 
   if cmd ~= "" then
-    vim.fn.system(cmd .. " " .. url)
+    vim.fn.system(cmd .. " " .. link)
   else
     print("Unsupported operating system")
   end
+end
+
+function U.open_github()
+  local file_path = vim.fn.expand('%')
+  local branch_name = vim.fn.system('git rev-parse --abbrev-ref HEAD'):gsub("\n", "")
+  local repo_url = vim.fn.system('git remote get-url origin'):gsub("\n", "") -- TODO remove git
+  
+  local repo_path = ""
+  -- TODO windows conversion
+  local rel_file_path = ""
+  -- file_path = file_path:gsub("\\", "/")
+   -- TODO cursor position if highlighted
+  local github_link = ""
+  -- local github_link = repo_url:gsub("git@github.com:", "https://github.com/"):gsub(".git", "") .. "/blob/" .. branch_name .. "/" .. file_path
+
+  -- Open the browser with the generated GitHub URL
+  U.open_browser(github_link)
+
+  -- Copy the URL to clipboard
+  vim.fn.setreg('+', github_link)
+end
+
+-- function U.open_github()
+--     local file_path = vim.fn.expand('%')
+--     local branch_name = vim.fn.system('git rev-parse --abbrev-ref HEAD'):gsub("\n", "")
+--     local repo_url = vim.fn.system('git remote get-url origin'):gsub("\n", "")
+--     local github_link = repo_url:gsub("git@github.com:", "https://github.com/"):gsub(".git", "") .. "/blob/" .. branch_name .. "/" .. file_path
+--
+--     U.open_browser(github_link)
+--
+--     vim.fn.setreg('+', github_link)  -- Copy to clipboard
+-- end
+
+function U.open_cdk_docs()
+  local word = vim.fn.expand("<cword>")
+  local url = "https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/" .. word .. ".html"
+
+  U.open_browser(url)
 end
 
 -- vim.api.nvim_set_keymap('n', '<leader>co', U.open_cdk_docs, { noremap = true, silent = true })
@@ -121,5 +156,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
   once = true,
 })
+
+
 
 return U
