@@ -90,7 +90,7 @@ wk.add({
   {
     "<leader>oe",
     function()
-      OpenExplorer()
+      utils.OpenExplorer()
     end,
     desc = "Open explorer",
   },
@@ -103,7 +103,7 @@ wk.add({
   { "<leader>oD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
   { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
   { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
-  { "<leader>ot", "<cmd>Neotree<cr>",                   desc = "Oil in notes" },
+  { "<leader>ot", "<cmd>Neotree reveal<cr>",                   desc = "Oil in notes" },
 
   -- { "<leader>rT", require("dap-python").test_method,            desc = "Debug Test Method" },
 

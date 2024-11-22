@@ -26,13 +26,23 @@ return {
           nowait = true,
         },
         mappings = {
-          ["<enter>"] = { 
-            "toggle_node", 
-            nowait = false, 
-          },
+          ["<enter>"] = "open",
+          -- ["<enter>"] = { 
+            -- "toggle_node", 
+            -- nowait = false, 
+          -- },
           ["<space>"] = false  
         }
+ 
       },
+      buffers = {
+          follow_current_file = {
+            enabled = true, 
+            leave_dirs_open = false, 
+        }
+      },
+
+      auto_open = false,
     }
   },
   -- {
