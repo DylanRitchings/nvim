@@ -106,41 +106,41 @@ return {
         })
       end,
       keys = {
-        {
-          "<leader>tt",
-          function()
-            require("neotest").run.run()
-          end,
-          desc = "run nearest test",
-        },
-        {
-          "<leader>td",
-          function()
-            require("neotest").run.run({ strategy = 'dap' })
-          end,
-          desc = "debug nearest test",
-        },
-        {
-          "<leader>tf",
-          function()
-            require("neotest").run.run(vim.fn.expand("%"))
-          end,
-          desc = "run current file",
-        },
-        {
-          "<leader>ta",
-          function()
-            require("neotest").run.attach()
-          end,
-          desc = "test attach",
-        },
-        {
-          "<leader>tw",
-          function()
-            require("neotest").watch.toggle(vim.fn.expand("%"))
-          end,
-          desc = "watch tests in file",
-        },
+        -- {
+        --   "<leader>tt",
+        --   function()
+        --     require("neotest").run.run()
+        --   end,
+        --   desc = "run nearest test",
+        -- },
+        -- {
+        --   "<leader>td",
+        --   function()
+        --     require("neotest").run.run({ strategy = 'dap' })
+        --   end,
+        --   desc = "debug nearest test",
+        -- },
+        -- {
+        --   "<leader>tf",
+        --   function()
+        --     require("neotest").run.run(vim.fn.expand("%"))
+        --   end,
+        --   desc = "run current file",
+        -- },
+        -- {
+        --   "<leader>ta",
+        --   function()
+        --     require("neotest").run.attach()
+        --   end,
+        --   desc = "test attach",
+        -- },
+        -- {
+        --   "<leader>tw",
+        --   function()
+        --     require("neotest").watch.toggle(vim.fn.expand("%"))
+        --   end,
+        --   desc = "watch tests in file",
+        -- },
       },
     },
 

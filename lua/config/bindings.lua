@@ -45,7 +45,10 @@ wk.add({
   --   desc = "Live grep in current dir",
   -- },
   --TEST
-
+  
+  { "<leader>t",    group = "toggle" },
+  { "<leader>tt", "<cmd>Neotree reveal<cr>",                   desc = "Neotree" },
+  { "<leader>tn", ":set relativenumber!<CR>",                   desc = "Relative number" },
   --{ "<leader>t",    group = "test" },
   --{ "<leader>tt",   test.run.run(),       desc = "Search current dir" },
 
@@ -97,13 +100,20 @@ wk.add({
 
   -- OIL
   -- { "<leader>d",  group = "Dired" },
-  { "<leader>of", "<cmd>Oil<cr>",                               desc = "Oil file manager" },
-  { "<leader>op", "<cmd>Oil .<cr>",                             desc = "Oil in project root" },
-  { "<leader>oh", "<cmd>Oil ~<cr>",                             desc = "Oil in home directory" },
-  { "<leader>oD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
-  { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
-  { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
-  { "<leader>ot", "<cmd>Neotree reveal<cr>",                   desc = "Oil in notes" },
+  { "<leader>dd", "<cmd>Oil<cr>",                               desc = "Oil file manager" },
+  { "<leader>dp", "<cmd>Oil .<cr>",                             desc = "Oil in project root" },
+  { "<leader>dh", "<cmd>Oil ~<cr>",                             desc = "Oil in home directory" },
+  { "<leader>dD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
+  { "<leader>dr", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
+  { "<leader>dn", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
+  { "<leader>dt", "<cmd>Neotree reveal<cr>",                   desc = "Tree"},
+  -- { "<leader>of", "<cmd>Oil<cr>",                               desc = "Oil file manager" },
+  -- { "<leader>op", "<cmd>Oil .<cr>",                             desc = "Oil in project root" },
+  -- { "<leader>oh", "<cmd>Oil ~<cr>",                             desc = "Oil in home directory" },
+  -- { "<leader>oD", "<cmd>Oil ~/dev<cr>",                         desc = "Oil in dev directory" },
+  -- { "<leader>or", "<cmd>Oil ~/dev/work_repos<cr>",              desc = "Oil in work repos" },
+  -- { "<leader>on", "<cmd>Oil ~/dev/notes<cr>",                   desc = "Oil in notes" },
+  -- { "<leader>ot", "<cmd>Neotree reveal<cr>",                   desc = "Tree"},
 
   -- { "<leader>rT", require("dap-python").test_method,            desc = "Debug Test Method" },
 
@@ -112,8 +122,8 @@ wk.add({
 
   -- GIT
   { "<leader>g",  group = "Git" },
-  { "<leader>gt", "<cmd>!git checkout --theirs %<cr>", desc = "Git checkout theirs" },
-  { "<leader>gm", "<cmd>!git checkout --mine %<cr>", desc = "Git checkout mine" },
+  { "<leader>gt", "<cmd>!git checkout --theirs -- '%'<cr>", desc = "Git checkout theirs" },
+  { "<leader>gm", "<cmd>!git checkout --ours -- '%'<cr>", desc = "Git checkout mine" },
   { "<leader>gn", "<cmd>!git diff --name-only --diff-filter=U | head -n 1 | xargs -I {} vim {}<cr>", desc = "Go to next conflict in repo" },
   { "<leader>gh", function() utils.open_github() end, desc = "Get GitHub link for current file"},
 
