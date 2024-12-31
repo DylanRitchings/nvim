@@ -232,7 +232,7 @@ return {
       { "<leader>gf", "<cmd>Git fetch<CR>",                 desc = "Fetch" },
       { "<leader>gb", "<cmd>Git branch<CR>",                desc = "Branch" },
       { "<leader>gB", "<cmd>Git blame<CR>",                 desc = "Blame" },
-      { "<leader>gL", "<cmd>Git log<CR>",                   desc = "Log" },
+      { "<leader>gl", "<cmd>Git log<CR>",                   desc = "Log" },
       { "<leader>gr", "<cmd>Git rebase<CR>",                desc = "Rebase" },
       { "<leader>gd", "<cmd>Git diff<CR>",                  desc = "Diff" },
       { "<leader>gD", "<cmd>Git diff origin/main -- %<CR>", desc = "Diff with origin/main" },
@@ -293,12 +293,5 @@ return {
     {
       "kevinhwang91/nvim-bqf"
     }
-  },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    -- opts = {
-    -- }
-  },
-  {"ahmedkhalf/project.nvim"}
+  }
 }

@@ -30,33 +30,36 @@ function U.open_browser(link)
   end
 end
 
-local function in_visual_mode()
-    local mode = vim.api.nvim_get_mode().mode
-    return mode == 'v' or mode == 'V' or mode == '\22' -- '\22' represents Ctrl-V (Visual Block mode)
-end
-
 function U.open_github()
-  local file_path = vim.fn.expand("%")
-  local branch_name = vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("\n", "")
-  local repo_url = vim.fn.system("git remote get-url origin"):gsub("\n", "") -- TODO remove git
+  local file_path = vim.fn.expand('%')
+  local branch_name = vim.fn.system('git rev-parse --abbrev-ref HEAD'):gsub("\n", "")
+  local repo_url = vim.fn.system('git remote get-url origin'):gsub("\n", "") -- TODO remove git
   
-  local repo_path = vim.fn.system("git rev-parse --show-toplevel"):gsub("\n", "")
+  local repo_path = ""
   -- TODO windows conversion
-  local rel_file_path = string.gsub(file_path, repo_path, "")
+  local rel_file_path = ""
+  -- file_path = file_path:gsub("\\", "/")
+   -- TODO cursor position if highlighted
+  local github_link = ""
+  -- local github_link = repo_url:gsub("git@github.com:", "https://github.com/"):gsub(".git", "") .. "/blob/" .. branch_name .. "/" .. file_path
 
-  local line_num = ""
-  if in_visual_mode() then
-    local start_pos = vim.api.nvim_win_get_cursor(0)[1] 
-    local end_pos = vim.fn.getpos('v')[2]
-    line_num = "#L" .. start_pos .. "-L" .. end_pos
-  end
-
-  local github_link = repo_url .. "/blob/" .. branch_name .. "/" .. rel_file_path .. line_num
+  -- Open the browser with the generated GitHub URL
   U.open_browser(github_link)
 
+  -- Copy the URL to clipboard
   vim.fn.setreg('+', github_link)
 end
 
+-- function U.open_github()
+--     local file_path = vim.fn.expand('%')
+--     local branch_name = vim.fn.system('git rev-parse --abbrev-ref HEAD'):gsub("\n", "")
+--     local repo_url = vim.fn.system('git remote get-url origin'):gsub("\n", "")
+--     local github_link = repo_url:gsub("git@github.com:", "https://github.com/"):gsub(".git", "") .. "/blob/" .. branch_name .. "/" .. file_path
+--
+--     U.open_browser(github_link)
+--
+--     vim.fn.setreg('+', github_link)  -- Copy to clipboard
+-- end
 
 function U.open_cdk_docs()
   local word = vim.fn.expand("<cword>")
