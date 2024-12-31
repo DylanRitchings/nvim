@@ -29,8 +29,9 @@ wk.add({
   { "<leader>ml",    "<cmd>Mason<cr>",                desc = "Manage LSP" },
 
 
+  { "<leader><leader>", "<cmd>Telescope find_files<cr>",                             desc = "Search repo" },
   { "<leader><cr>", function() utils.ex_in_dir(ts.git_files) end,        desc = "Search whole repo" },
-  { "<leader>.",    function() utils.ex_in_dir(ts.find_files) end,       desc = "Search current dir" },
+  -- { "<leader>.",    function() utils.ex_in_dir(ts.find_files) end,       desc = "Search current dir" },
   -- { "<leader>/",    ts.find_files, desc = "Live grep in root" },
   { "<leader>,",    function() utils.ex_in_dir(ts.live_grep) end, desc = "Live grep in root" },
   { "<leader>.",    "<cmd>Telescope live_grep<cr>", desc = "Live grep in root" },
@@ -41,6 +42,7 @@ wk.add({
   --   "<leader>dg",
   --   function()
   --     ts.live_grep({ cwd = vim.fn.expand("%:p:h") })
+  --     f
   --   end,
   --   desc = "Live grep in current dir",
   -- },
@@ -78,6 +80,7 @@ wk.add({
   { "<leader>p",  group = "Project" },
   { "<leader>pf", "<cmd>Telescope find_files<cr>",                             desc = "Search repo" },
   { "<leader>pg", "<cmd>Telescope live_grep<cr>",                              desc = "Grep project" },
+  { "<leader>pp", "<cmd>Telescope projects<cr>",                              desc = "Grep project" },
 
   
   -- BUFFERS
@@ -125,7 +128,7 @@ wk.add({
   { "<leader>gt", "<cmd>!git checkout --theirs -- '%'<cr>", desc = "Git checkout theirs" },
   { "<leader>gm", "<cmd>!git checkout --ours -- '%'<cr>", desc = "Git checkout mine" },
   { "<leader>gn", "<cmd>!git diff --name-only --diff-filter=U | head -n 1 | xargs -I {} vim {}<cr>", desc = "Go to next conflict in repo" },
-  { "<leader>gh", function() utils.open_github() end, desc = "Get GitHub link for current file"},
+  { "<leader>gl", function() utils.open_github() end, desc = "Get GitHub link for current file"},
 
   -- LSP Navigation
   { "<leader>c",  group = "LSP" },
@@ -162,5 +165,6 @@ wk.add({
   { "<leader>wL", "<C-w>L",                                     desc = "Move window to far right" },
   { "<leader>wd", "<C-w>c",                                     desc = "Close window" },
   { "<leader>ww", "<C-w>w",                                     desc = "Go to next window" },
+  mode = { "n", "v" },
 })
 
