@@ -53,4 +53,3 @@ if is_windows then
   vim.opt.shellslash = true
 elseif is_mac then
 end
-

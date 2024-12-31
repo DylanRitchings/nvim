@@ -41,6 +41,7 @@ function U.open_github()
   local repo_url = vim.fn.system("git remote get-url origin"):gsub("\n", "") -- TODO remove git
   
   local repo_path = vim.fn.system("git rev-parse --show-toplevel"):gsub("\n", "")
+  repo_path = repo_path:gsub("%.git$", "")
   -- TODO windows conversion
   local rel_file_path = string.gsub(file_path, repo_path, "")
 

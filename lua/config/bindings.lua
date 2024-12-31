@@ -16,6 +16,9 @@ vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true
 vim.keymap.set("n", "<M-j>", ":cn<CR>", { desc = "Goto next quickfix", silent = true })
 vim.keymap.set("n", "<M-k>", ":cp<CR>", { desc = "Goto previous quickfix", silent = true })
 
+vim.keymap.set('n', '<C-s>', function()
+  vim.cmd('!bash window-split')
+end, { noremap = true, silent = true, desc = "Run window-split bash script" })
 
 local utils = require("config.utils")
 local wk = require("which-key")
@@ -167,4 +170,3 @@ wk.add({
   { "<leader>ww", "<C-w>w",                                     desc = "Go to next window" },
   mode = { "n", "v" },
 })
-
