@@ -2,6 +2,10 @@ return {
   "folke/neodev.nvim",
   "hrsh7th/cmp-nvim-lsp",
   {
+    "NoahTheDuke/vim-just",
+    ft = "just",
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -46,8 +50,8 @@ return {
         ensure_installed = {
           "lua_ls",
           "pyright",
-          "black",
-          "pylint",
+          -- "black",
+          -- "pylint",
           "ruff",
           "biome",
           "docker_compose_language_service",
@@ -55,7 +59,7 @@ return {
           "hydra_lsp",
           "terraformls",
           "nil_ls",
-          "rnix"
+          "rnix",
           "sqlls",
           "bashls",
           -- "harper_ls"

@@ -4,9 +4,20 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",  -- Set transparency for sidebars
+        floats = "transparent",    -- Set transparency for floats
+      },
+    },
     config = function()
       vim.cmd([[colorscheme tokyonight]])
+
+      -- Ensure the normal background is transparent
+      vim.cmd([[highlight Normal guibg=NONE]])
+      vim.cmd([[highlight NormalNC guibg=NONE]])  -- For non-current windows
+      vim.cmd([[highlight StatusLine guibg=NONE]])  -- Optional: For the statusline background
     end,
   },
   {
@@ -187,7 +198,7 @@ return {
       },
 
       keymaps = {
-        ["q"] = "actions.close",
+        ["Q"] = "actions.close",
         ["<BS>"] = "actions.parent",
         ["gx"] = "actions.open_external",
       },

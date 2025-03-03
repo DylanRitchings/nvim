@@ -62,3 +62,5 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   pattern = { "terraform", "hcl" },
 })
+
+vim.o.termguicolors = true  -- Enable 24-bit RGB color

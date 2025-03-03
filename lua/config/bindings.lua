@@ -148,9 +148,7 @@ wk.add({
   { "<leader>ck", vim.diagnostic.open_float,                    desc = "Show diagnostics" },
   { "<leader>cn", vim.diagnostic.goto_next,                     desc = "Next diagnostic" },
   { "<leader>cp", vim.diagnostic.goto_prev,                     desc = "Previous diagnostic" },
-  { "<leader>xq", function() require('dapui').close() end,      desc = "Close DAP ui" },
-  { "<leader>xt", function() require('dap-python').test_method() end,      desc = "Debug test" },
-  -- { "<leader>cc", toggle_comment(),                             desc = "Toggle comment" },
+ -- { "<leader>cc", toggle_comment(),                             desc = "Toggle comment" },
   -- WINDOW MANAGEMENT
   { "<leader>w",  group = "Window" },
   { "<leader>wh", "<C-w>h",                                     desc = "Move to left window" },
@@ -170,34 +168,6 @@ wk.add({
   { "<leader>wL", "<C-w>L",                                     desc = "Move window to far right" },
   { "<leader>wd", "<C-w>c",                                     desc = "Close window" },
   { "<leader>ww", "<C-w>w",                                     desc = "Go to next window" },
-
   mode = { "n", "v" },
 })
 
-
---
--- -- DAP
--- -- DAP Keymaps
--- local dap = require("dap")
--- -- Step Over (Ctrl + O)
--- vim.api.nvim_set_keymap('n', '<C-o>', [[:lua require('dap').step_over()<CR>]], { noremap = true, silent = true })
--- -- Step Into (Ctrl + I)
--- vim.api.nvim_set_keymap('n', '<C-i>', [[:lua require('dap').step_into()<CR>]], { noremap = true, silent = true })
--- -- Step Out (Ctrl + U)
--- vim.api.nvim_set_keymap('n', '<C-u>', [[:lua require('dap').step_out()<CR>]], { noremap = true, silent = true })
--- -- Continue (Ctrl + C)
--- vim.api.nvim_set_keymap('n', '<C-c>', [[:lua require('dap').continue()<CR>]], { noremap = true, silent = true })
--- -- Pause (Ctrl + P)
--- vim.api.nvim_set_keymap('n', '<C-p>', [[:lua require('dap').pause()<CR>]], { noremap = true, silent = true })
--- -- Toggle Breakpoint (F9)
--- vim.api.nvim_set_keymap('n', '<F9>', [[:lua require('dap').toggle_breakpoint()<CR>]], { noremap = true, silent = true })
--- -- Conditional Breakpoint (Shift + F9)
--- vim.api.nvim_set_keymap('n', '<S-F9>', [[:lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]], { noremap = true, silent = true })
--- -- Log Point (Ctrl + L)
--- vim.api.nvim_set_keymap('n', '<C-l>', [[:lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>]], { noremap = true, silent = true })
--- -- Run/Continue (F5)
--- vim.api.nvim_set_keymap('n', '<F5>', [[:lua require('dap').continue()<CR>]], { noremap = true, silent = true })
--- -- Restart the Debugger (Ctrl + R)
--- vim.api.nvim_set_keymap('n', '<C-r>', [[:lua require('dap').restart()<CR>]], { noremap = true, silent = true })
--- -- Stop the Debugger (Ctrl + Q)
--- vim.api.nvim_set_keymap('n', '<C-q>', [[:lua require('dap').close()<CR>]], { noremap = true, silent = true })
