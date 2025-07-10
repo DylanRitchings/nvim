@@ -138,7 +138,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.tex",
   group = "AutoPdf",
   callback = function()
-    vim.cmd([[!latexmk -pdf -pv -xelatex]])
+    -- vim.cmd([[!latexmk -pdf -pv -xelatex]])
+    local filename = vim.fn.expand("%")
+    vim.cmd("!xelatex " .. filename)
   end,
 })
 

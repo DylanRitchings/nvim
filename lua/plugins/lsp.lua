@@ -7,6 +7,10 @@ return {
   },
 
   {
+    "NoahTheDuke/vim-just",
+    ft = "just",
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -49,20 +53,30 @@ return {
       mason.setup()
       mason_lspconfig.setup({
         ensure_installed = {
-          "lua_ls",
-          "pyright",
-          "black",
-          "pylint",
+          -- "lua_ls",
+          -- "pyright",
+          -- "black",
+          -- "pylint",
+          -- -- "ruff",
+          -- "biome",
+          -- "docker_compose_language_service",
+          -- "dockerls",
+          -- -- "hydra_lsp",
+          -- -- "mypy",
+          -- "terraformls",
+          -- -- "black",
+          -- -- "pylint",
           -- "ruff",
-          "biome",
-          "docker_compose_language_service",
-          "dockerls",
+          -- "biome",
+          -- "docker_compose_language_service",
+          -- "dockerls",
           -- "hydra_lsp",
-          -- "mypy",
-          "terraformls",
-          "sqlls",
-          "bashls",
-          -- "harper_ls"
+          -- "terraformls",
+          -- "nil_ls",
+          -- "rnix",
+          -- "sqlls",
+          -- "bashls",
+          -- -- "harper_ls"
         },
         automatic_installation = true,
         automatic_enable = true,
