@@ -1,6 +1,11 @@
 return {
   "folke/neodev.nvim",
   "hrsh7th/cmp-nvim-lsp",
+  { 
+    "williamboman/mason-lspconfig.nvim",
+    version = "v1.32.0"
+  },
+
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -48,17 +53,19 @@ return {
           "pyright",
           "black",
           "pylint",
-          "ruff",
+          -- "ruff",
           "biome",
           "docker_compose_language_service",
           "dockerls",
-          "hydra_lsp",
+          -- "hydra_lsp",
           -- "mypy",
-          -- "terraformls",
+          "terraformls",
           "sqlls",
           "bashls",
           -- "harper_ls"
         },
+        automatic_installation = true,
+        automatic_enable = true,
       })
 
       mason_lspconfig.setup_handlers({
@@ -66,9 +73,6 @@ return {
           lspconfig[server_name].setup({
             on_attach = on_attach,
             capabilities = capabilities,
-            init_options = {
-              timeout = 5000
-            }
           })
         end,
       })
@@ -142,19 +146,18 @@ return {
       local configs = require("nvim-treesitter.configs")
       require("nvim-treesitter.install").prefer_git = false
       require("nvim-treesitter.install").compilers = { vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl", "zig" }
+      local data_dir = vim.fn.stdpath('data')
       configs.setup({
-
         ensure_installed = {
           "vim", "vimdoc", "query", "heex", "javascript", "html", "css",
           "python", "markdown", "markdown_inline", "bash", "powershell", "yaml", "org",
           "git_config", "git_rebase", "gitignore", "gitcommit", "gitattributes", "diff",
           "json", "make", "editorconfig", "hjson", "http" },
         auto_install= false,
-        sync_install = false,
+        sync_install = true,
         ignore_install = {},
         highlight = { enable = true },
         indent = { enable = true },
-        modules = {},
       })
     end
   },

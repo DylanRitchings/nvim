@@ -4,11 +4,33 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      style = "storm", -- or "night", "moon", "day"
+      transparent = true,
+    },
     config = function()
       vim.cmd([[colorscheme tokyonight]])
     end,
   },
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     opts = function (_, opts)
+  --       opts.ensure_installed = opts.ensure_installed or {}
+  --       opts.rocks.hererocks = true
+  --       table.insert(opts.ensure_installed, "http")
+  --     end,
+  --   }
+  -- },
+  -- {
+  --   'wet-sandwich/hyper.nvim',
+  --   dependencies = { 'nvim-lua/plenary.nvim' }
+  -- },
+  -- { 'mistweaverco/kulala.nvim', opts = { 
+  --     default_view = "verbose",
+  --     debug = true,
+  -- } },
   {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
@@ -106,24 +128,24 @@ return {
     event = "VeryLazy",
   },
 
-  -- {
-  --   "epwalsh/obsidian.nvim",
-  --   version = "*",
-  --   lazy = true,
-  --   ft = "markdown",
-  --
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   opts = {
-  --     workspaces = {
-  --       {
-  --         name = "notes",
-  --         path = "~/dev/notes",
-  --       },
-  --     },
-  --   },
-  -- },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    ft = "markdown",
+
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "notes",
+          path = "~/dev/notes",
+        },
+      },
+    },
+  },
   -- {
   --   "stevearc/conform.nvim",
   --   opts = {},
@@ -146,7 +168,6 @@ return {
     version = "*",
     config = function()
 
-      require("mini.ai").setup()
       require("mini.basics").setup()
       require("mini.bufremove").setup()
       require("mini.comment").setup()
