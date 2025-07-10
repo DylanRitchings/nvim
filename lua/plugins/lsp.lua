@@ -1,7 +1,7 @@
 return {
   "folke/neodev.nvim",
   "hrsh7th/cmp-nvim-lsp",
-  { 
+  {
     "williamboman/mason-lspconfig.nvim",
     version = "v1.32.0"
   },
@@ -34,9 +34,14 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function()
+          vim.lsp.buf.format({ async = false })
+        end,
+      })
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
-
       -- Basic LSP setup
       local on_attach = function(client, bufnr)
         -- Add your keymaps and other on_attach logic here
@@ -109,6 +114,18 @@ return {
           },
         },
       })
+      lspconfig.sourcekit.setup({
+        cmd = { "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp" },
+        root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+        -- ROOT_DIR = lspconfig.util.root_pattern(".git", "Package.swift", "compile_commands.json");
+        capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          },
+        },
+      })
     end,
   },
   {
@@ -167,7 +184,7 @@ return {
           "python", "markdown", "markdown_inline", "bash", "powershell", "yaml", "org",
           "git_config", "git_rebase", "gitignore", "gitcommit", "gitattributes", "diff",
           "json", "make", "editorconfig", "hjson", "http" },
-        auto_install= false,
+        auto_install = false,
         sync_install = true,
         ignore_install = {},
         highlight = { enable = true },

@@ -9,7 +9,6 @@ return {
       "microsoft/debugpy",
       "mfussenegger/nvim-dap",
     },
-    -- branch = "regexp",
     lazy = true,
     opts = {
       stay_on_this_version = true,
@@ -21,9 +20,17 @@ return {
       },
       dap_enabled = true,
       auto_refresh = true,
+
+      -- Hatch venv scanning for venv-selector
+      search_venv_managers = {
+        hatch = {
+          path = vim.fn.expand("~") .. "/Library/Caches/hatch/env/virtual",
+          recursive = true,
+        },
+      },
     },
     keys = {
-      { "<leader>cv", "<cmd>:venvselect<cr>", desc = "select virtualenv" },
+      { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "select virtualenv" },
     },
   },
   {
