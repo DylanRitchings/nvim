@@ -151,7 +151,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     local venv = string.format("%s/.venv", ROOT_DIR)
     if venv ~= "" then
-      require("venv-selector").retrieve_from_cache()
+  -- require("venv-selector").retrieve_from_cache()
     end
   end,
   once = true,

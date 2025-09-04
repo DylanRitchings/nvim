@@ -132,22 +132,7 @@ wk.add({
   { "<leader>gn", "<cmd>!git diff --name-only --diff-filter=U | head -n 1 | xargs -I {} vim {}<cr>", desc = "Go to next conflict in repo" },
   { "<leader>gl", function() utils.open_github() end,                                                desc = "Get GitHub link for current file" },
 
-  -- LSP Navigation
-  { "<leader>c",  group = "LSP" },
-  { "<leader>cd", vim.lsp.buf.definition,                                                            desc = "Go to definition" },
-  { "<leader>cD", vim.lsp.buf.declaration,                                                           desc = "Go to declaration" },
-  { "<leader>ci", vim.lsp.buf.implementation,                                                        desc = "Go to implementation" },
-  { "<leader>ct", vim.lsp.buf.type_definition,                                                       desc = "Go to type definition" },
-  { "<leader>cr", vim.lsp.buf.references,                                                            desc = "Find references" },
-  { "<leader>cs", vim.lsp.buf.signature_help,                                                        desc = "Signature help" },
-  { "<leader>cR", vim.lsp.buf.rename,                                                                desc = "Rename" },
-  { "<leader>cf", vim.lsp.buf.format,                                                                desc = "Format" },
-  { "<leader>ca", vim.lsp.buf.code_action,                                                           desc = "Code action" },
-  { "<leader>ch", vim.lsp.buf.hover,                                                                 desc = "Hover" },
-  { "<leader>ck", vim.diagnostic.open_float,                                                         desc = "Show diagnostics" },
-  { "<leader>cn", vim.diagnostic.goto_next,                                                          desc = "Next diagnostic" },
-  { "<leader>cp", vim.diagnostic.goto_prev,                                                          desc = "Previous diagnostic" },
-  -- { "<leader>cc", toggle_comment(),                             desc = "Toggle comment" },
+  -- LSP Navigation keymaps are now set in the LSP on_attach function for buffer-local usage.
   -- WINDOW MANAGEMENT
   { "<leader>w",  group = "Window" },
   { "<leader>wh", "<C-w>h",                                                                          desc = "Move to left window" },

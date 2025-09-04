@@ -8,8 +8,8 @@ return {
       style = "storm", -- or "night", "moon", "day"
       transparent = true,
       styles = {
-        sidebars = "transparent",  -- Set transparency for sidebars
-        floats = "transparent",    -- Set transparency for floats
+        sidebars = "transparent", -- Set transparency for sidebars
+        floats = "transparent",   -- Set transparency for floats
       },
     },
     config = function()
@@ -17,8 +17,8 @@ return {
 
       -- Ensure the normal background is transparent
       vim.cmd([[highlight Normal guibg=NONE]])
-      vim.cmd([[highlight NormalNC guibg=NONE]])  -- For non-current windows
-      vim.cmd([[highlight StatusLine guibg=NONE]])  -- Optional: For the statusline background
+      vim.cmd([[highlight NormalNC guibg=NONE]])   -- For non-current windows
+      vim.cmd([[highlight StatusLine guibg=NONE]]) -- Optional: For the statusline background
     end,
   },
   -- {
@@ -36,20 +36,20 @@ return {
   --   'wet-sandwich/hyper.nvim',
   --   dependencies = { 'nvim-lua/plenary.nvim' }
   -- },
-  -- { 'mistweaverco/kulala.nvim', opts = { 
+  -- { 'mistweaverco/kulala.nvim', opts = {
   --     default_view = "verbose",
   --     debug = true,
   -- } },
   {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-      },
-      opts = {
-       window = {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      window = {
         position = "left",
         width = 40,
         mapping_options = {
@@ -58,18 +58,18 @@ return {
         },
         mappings = {
           ["<enter>"] = "open",
-          -- ["<enter>"] = { 
-            -- "toggle_node", 
-            -- nowait = false, 
+          -- ["<enter>"] = {
+          -- "toggle_node",
+          -- nowait = false,
           -- },
-          ["<space>"] = false  
+          ["<space>"] = false
         }
- 
+
       },
       buffers = {
-          follow_current_file = {
-            enabled = true, 
-            leave_dirs_open = false, 
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = false,
         }
       },
 
@@ -93,8 +93,8 @@ return {
   --     },
   --   },
   -- },
-  { 
-    
+  {
+
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
       local telescope = require("telescope")
@@ -115,18 +115,18 @@ return {
           "--hidden" -- Add this to search hidden files
         },
       })
-      
+
       opts.pickers = {
         find_files = {
           hidden = true -- This will allow find_files to show hidden files
         },
         live_grep = {
           additional_args = function()
-            return {"--hidden"}
+            return { "--hidden" }
           end
         }
       }
-  
+
       return opts
     end,
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -176,7 +176,6 @@ return {
     "echasnovski/mini.nvim",
     version = "*",
     config = function()
-
       require("mini.basics").setup()
       require("mini.bufremove").setup()
       require("mini.comment").setup()
@@ -236,7 +235,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {"nvim-treesitter/nvim-treesitter"}
+    dependencies = { "nvim-treesitter/nvim-treesitter" }
   },
   -- {
   -- 	"NeogitOrg/neogit",
@@ -288,21 +287,21 @@ return {
     end
   },
   {
-      "kylechui/nvim-surround",
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
-      event = "VeryLazy",
-      config = function()
-          require("nvim-surround").setup()
-      end
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end
   },
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
     opts = {
-        enabled = true,  -- if you want to enable the plugin
-        message_template = " <author> • <summary> • <date>" , -- template for the blame message, check the Message template section for more options
-        date_format = "%d-%m-%Y %H:%M:%S", -- template for the date, check Date format section for more options
-        virtual_text_coklumn = 1,  -- virtual text start column, check Start virtual text at column section for more options
+      enabled = true, -- if you want to enable the plugin
+      message_template = " <author> • <summary> • <date>", -- template for the blame message, check the Message template section for more options
+      date_format = "%d-%m-%Y %H:%M:%S", -- template for the date, check Date format section for more options
+      virtual_text_coklumn = 1, -- virtual text start column, check Start virtual text at column section for more options
     },
     -- {
     --   "easymotion/vim-easymotion",
@@ -314,11 +313,11 @@ return {
     --   },
     -- }
     {
-        'smoka7/hop.nvim',
-        version = "*",
-        opts = {
-            keys = 'etovxqpdygfblzhckisuran'
-        }
+      'smoka7/hop.nvim',
+      version = "*",
+      opts = {
+        keys = 'etovxqpdygfblzhckisuran'
+      }
     },
     {
       "kevinhwang91/nvim-bqf"
@@ -330,5 +329,12 @@ return {
     -- opts = {
     -- }
   },
-  {"ahmedkhalf/project.nvim"}
+  { "ahmedkhalf/project.nvim" },
+  {
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  }
 }

@@ -42,7 +42,12 @@ vim.opt.showbreak = ">>"
 vim.opt.linebreak = true
 vim.o.linebreak = true
 
-vim.lsp.buf.format({ timeout_ms = 10000 })
+-- Only format on LSP attach, not globally
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.buf.format({ timeout_ms = 10000 })
+  end,
+})
 -- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 -- end
 if is_windows then
