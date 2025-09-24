@@ -157,6 +157,34 @@ vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
 })
 
+-- TODO  
+-- Get list of commits for file
+-- Open file in the latest commit
+-- Cycle back and forth between commits 
+-- Create the same for oil
+local function get_file_commits()
+    -- Get the full path of the current file
+    local file_path = vim.fn.expand('%:p')
+
+    -- Run git log for the file and get output as a table
+    local commits = vim.fn.systemlist('git log --oneline -- ' .. vim.fn.shellescape(file_path))
+
+    -- Check for errors
+    if vim.v.shell_error ~= 0 then
+        print("Error: Not a git repository or file not tracked")
+        return {}
+    end
+
+    -- Return the commits table
+    return commits
+end
+
+-- Example usage: print the commits
+local commits = get_file_commits()
+for _, commit in ipairs(commits) do
+    print(commit)
+end
 
 
 return U
+

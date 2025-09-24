@@ -13,6 +13,7 @@ require("config.settings")
 
 require("lazy").setup("plugins")
 
+
 require("lualine").setup()
 
 require("config.bindings")

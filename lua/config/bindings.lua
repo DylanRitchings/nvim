@@ -1,21 +1,23 @@
 -- Scroll down half a screen and keep cursor in the middle
+local map = vim.keymap.set
+
 vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true })
 -- Scroll up half a screen and keep cursor in the middle
 vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true })
 
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
+map('v', '>', '>gv', { noremap = true, silent = true })
+map('v', '<', '<gv', { noremap = true, silent = true })
 
 -- Resizing keymaps using Control + . , - =
 -- Use Control + h/j/k/l to resize windows
-vim.keymap.set("n", "<C-l>", "<C-w><", { desc = "Decrease width", silent = true })
-vim.keymap.set("n", "<C-h>", "<C-w>>", { desc = "Increase width", silent = true })
-vim.keymap.set("n", "<C-j>", "<C-w>-", { desc = "Decrease height", silent = true })
-vim.keymap.set("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true })
-vim.keymap.set("n", "<M-j>", ":cn<CR>", { desc = "Goto next quickfix", silent = true })
-vim.keymap.set("n", "<M-k>", ":cp<CR>", { desc = "Goto previous quickfix", silent = true })
+map("n", "<C-l>", "<C-w><", { desc = "Decrease width", silent = true })
+map("n", "<C-h>", "<C-w>>", { desc = "Increase width", silent = true })
+map("n", "<C-j>", "<C-w>-", { desc = "Decrease height", silent = true })
+map("n", "<C-k>", "<C-w>+", { desc = "Increase height", silent = true })
+map("n", "<M-j>", ":cn<CR>", { desc = "Goto next quickfix", silent = true })
+map("n", "<M-k>", ":cp<CR>", { desc = "Goto previous quickfix", silent = true })
 
-vim.keymap.set('n', '<C-s>', function()
+map('n', '<C-s>', function()
   vim.cmd('!bash window-split')
 end, { noremap = true, silent = true, desc = "Run window-split bash script" })
 
@@ -164,3 +166,30 @@ wk.add({
   { "<leader>nl", "<cmd>ObsidianLink<CR>",                                                           desc = "Link" },
   mode = { "n", "v" },
 })
+
+-- Use <C-j> and <C-k> to navigate coc.nvim's completion menu
+map("i", "<C-j>", function()
+  return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
+end, { expr = true, silent = true })
+
+map("i", "<C-k>", function()
+  return vim.fn.pumvisible() == 1 and "<C-p>" or "<C-k>"
+end, { expr = true, silent = true })
+
+
+map("n", "<leader>gH", function()
+  local buf_type = vim.bo.filetype
+  local filepath = vim.fn.expand("%")
+  local cwd = vim.fn.getcwd()
+
+  if buf_type == "oil" then
+    vim.cmd("G log -- " .. cwd)
+  elseif vim.fn.empty(filepath) == 0 then
+    vim.cmd("Gclog " .. filepath)
+  else
+    print("No file to show git history for.")
+  end
+end, { desc = "Open Git History (file/folder)" })
+
+map("n", "<leader>gn", ":cnext<CR>", { desc = "Next Git commit" })
+map("n", "<leader>gp", ":cprev<CR>", { desc = "Previous Git commit" })
