@@ -3,7 +3,6 @@
   "suggest.enablePreselect": true,
   "suggest.minTriggerInputLength": 1,
   "suggest.triggerAfterInsertEnter": true,
-  "python.pythonPath": "/usr/bin/python3",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.useLibraryCodeForTypes": true,
@@ -14,6 +13,11 @@
     "reportUnusedImport": "warning"
   },
   "languageserver": {
+    "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"],
+      "rootPatterns": ["flake.nix", ".git"]
+    },
     "python": {
       "command": "pyright-langserver",
       "args": [
@@ -51,5 +55,8 @@
   "[toml]": {
     "coc.preferences.formatOnSave": false
   },
-  "coc.preferences.formatOnSave": true
+  "coc.preferences.formatOnSave": true,
+  "markdownlint.config": {
+    "MD013": false
+  }
 }

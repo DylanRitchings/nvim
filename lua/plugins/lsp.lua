@@ -25,9 +25,10 @@ return {
         vim.cmd('normal! <C-o>')
       end, { desc = "Go back to previous location" })
       vim.cmd [[
-        inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+        inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+        inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<Tab>"
+        inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
       ]]
-      vim.keymap.set("n", "g<Space>", 'coc#refresh()', { expr = true, silent = true, desc = "Trigger completion" })
       -- vim.api.nvim_create_autocmd("BufWritePre", {
       --   pattern = "*",
       --   callback = function()

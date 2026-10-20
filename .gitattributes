@@ -1,0 +1,3 @@
+# Store everything with LF. The Windows machine writes CRLF for new files
+# (see lua/config/windows.lua), which otherwise leaks into every other OS.
+* text=auto eol=lf

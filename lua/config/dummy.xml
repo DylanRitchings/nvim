@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+  <person id="1">
+    <name>John Doe</name>
+    <email>john.doe1@example.com</email>
+    <profile>
+      <age>30</age>
+      <isActive>true</isActive>
+      <balance>1234.56</balance>
+      <registered>2023-10-12</registered>
+      <address>
+        <street>123 Main St</street>
+        <city>Anytown</city>
+        <state>CA</state>
+        <zip>12345</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="2">
+    <name>Jane Smith</name>
+    <email>jane.smith2@example.com</email>
+    <profile>
+      <age>25</age>
+      <isActive>false</isActive>
+      <balance>567.89</balance>
+      <registered>2022-08-01</registered>
+      <address>
+        <street>456 Oak St</street>
+        <city>Othertown</city>
+        <state>NY</state>
+        <zip>67890</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>email</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="3">
+    <name>Alice Johnson</name>
+    <email>alice.johnson3@example.com</email>
+    <profile>
+      <age>28</age>
+      <isActive>true</isActive>
+      <balance>890.12</balance>
+      <registered>2021-11-15</registered>
+      <address>
+        <street>789 Pine St</street>
+        <city>Sometown</city>
+        <state>TX</state>
+        <zip>54321</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="4">
+    <name>Bob Williams</name>
+    <email>bob.williams4@example.com</email>
+    <profile>
+      <age>35</age>
+      <isActive>false</isActive>
+      <balance>2345.67</balance>
+      <registered>2020-06-20</registered>
+      <address>
+        <street>321 Maple St</street>
+        <city>Newcity</city>
+        <state>FL</state>
+        <zip>98765</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="5">
+    <name>Carol Brown</name>
+    <email>carol.brown5@example.com</email>
+    <profile>
+      <age>32</age>
+      <isActive>true</isActive>
+      <balance>1567.89</balance>
+      <registered>2019-09-10</registered>
+      <address>
+        <street>654 Cedar St</street>
+        <city>Oldtown</city>
+        <state>IL</state>
+        <zip>11223</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="6">
+    <name>David Lee</name>
+    <email>david.lee6@example.com</email>
+    <profile>
+      <age>29</age>
+      <isActive>true</isActive>
+      <balance>987.65</balance>
+      <registered>2023-01-05</registered>
+      <address>
+        <street>987 Birch St</street>
+        <city>Eastville</city>
+        <state>WA</state>
+        <zip>33445</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>sms</notification>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="7">
+    <name>Eve Miller</name>
+    <email>eve.miller7@example.com</email>
+    <profile>
+      <age>27</age>
+      <isActive>false</isActive>
+      <balance>432.10</balance>
+      <registered>2022-03-22</registered>
+      <address>
+        <street>159 Walnut St</street>
+        <city>Westville</city>
+        <state>OR</state>
+        <zip>55667</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="8">
+    <name>Frank Harris</name>
+    <email>frank.harris8@example.com</email>
+    <profile>
+      <age>40</age>
+      <isActive>true</isActive>
+      <balance>3456.78</balance>
+      <registered>2018-07-12</registered>
+      <address>
+        <street>753 Spruce St</street>
+        <city>Northcity</city>
+        <state>CO</state>
+        <zip>77889</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="9">
+    <name>Grace Clark</name>
+    <email>grace.clark9@example.com</email>
+    <profile>
+      <age>31</age>
+      <isActive>false</isActive>
+      <balance>2100.00</balance>
+      <registered>2021-12-30</registered>
+      <address>
+        <street>852 Elm St</street>
+        <city>Southtown</city>
+        <state>NV</state>
+        <zip>99001</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>email</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="10">
+    <name>Henry Lewis</name>
+    <email>henry.lewis10@example.com</email>
+    <profile>
+      <age>26</age>
+      <isActive>true</isActive>
+      <balance>765.43</balance>
+      <registered>2020-05-18</registered>
+      <address>
+        <street>963 Fir St</street>
+        <city>Centralcity</city>
+        <state>MI</state>
+        <zip>22334</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="11">
+    <name>Ivy Walker</name>
+    <email>ivy.walker11@example.com</email>
+    <profile>
+      <age>34</age>
+      <isActive>false</isActive>
+      <balance>1987.65</balance>
+      <registered>2019-08-25</registered>
+      <address>
+        <street>147 Poplar St</street>
+        <city>Lakeview</city>
+        <state>MN</state>
+        <zip>44556</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="12">
+    <name>Jack Hall</name>
+    <email>jack.hall12@example.com</email>
+    <profile>
+      <age>38</age>
+      <isActive>true</isActive>
+      <balance>2345.12</balance>
+      <registered>2023-02-14</registered>
+      <address>
+        <street>258 Ash St</street>
+        <city>Hilltown</city>
+        <state>AZ</state>
+        <zip>66778</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="13">
+    <name>Kara Young</name>
+    <email>kara.young13@example.com</email>
+    <profile>
+      <age>29</age>
+      <isActive>true</isActive>
+      <balance>876.54</balance>
+      <registered>2021-11-11</registered>
+      <address>
+        <street>369 Willow St</street>
+        <city>Forestville</city>
+        <state>VT</state>
+        <zip>88990</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="14">
+    <name>Liam King</name>
+    <email>liam.king14@example.com</email>
+    <profile>
+      <age>33</age>
+      <isActive>false</isActive>
+      <balance>1456.78</balance>
+      <registered>2020-09-03</registered>
+      <address>
+        <street>741 Cherry St</street>
+        <city>Rivercity</city>
+        <state>ME</state>
+        <zip>10112</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="15">
+    <name>Mia Scott</name>
+    <email>mia.scott15@example.com</email>
+    <profile>
+      <age>28</age>
+      <isActive>true</isActive>
+      <balance>654.32</balance>
+      <registered>2019-06-21</registered>
+      <address>
+        <street>852 Magnolia St</street>
+        <city>Beachville</city>
+        <state>SC</state>
+        <zip>12134</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="16">
+    <name>Noah Adams</name>
+    <email>noah.adams16@example.com</email>
+    <profile>
+      <age>36</age>
+      <isActive>false</isActive>
+      <balance>2100.45</balance>
+      <registered>2018-12-30</registered>
+      <address>
+        <street>963 Cypress St</street>
+        <city>Mountaintown</city>
+        <state>ID</state>
+        <zip>14156</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="17">
+    <name>Olivia Baker</name>
+    <email>olivia.baker17@example.com</email>
+    <profile>
+      <age>27</age>
+      <isActive>true</isActive>
+      <balance>987.12</balance>
+      <registered>2023-04-07</registered>
+      <address>
+        <street>147 Dogwood St</street>
+        <city>Valleycity</city>
+        <state>NM</state>
+        <zip>16178</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="18">
+    <name>Paul Carter</name>
+    <email>paul.carter18@example.com</email>
+    <profile>
+      <age>31</age>
+      <isActive>false</isActive>
+      <balance>1345.67</balance>
+      <registered>2022-10-19</registered>
+      <address>
+        <street>258 Palm St</street>
+        <city>Desertville</city>
+        <state>UT</state>
+        <zip>18190</zip>
+      </address>
+      <preferences>
+        <newsletter>false</newsletter>
+        <notifications>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="19">
+    <name>Quinn Evans</name>
+    <email>quinn.evans19@example.com</email>
+    <profile>
+      <age>30</age>
+      <isActive>true</isActive>
+      <balance>765.12</balance>
+      <registered>2021-03-08</registered>
+      <address>
+        <street>369 Redwood St</street>
+        <city>Canyoncity</city>
+        <state>OR</state>
+        <zip>20212</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>email</notification>
+          <notification>push</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+  <person id="20">
+    <name>Rachel Foster</name>
+    <email>rachel.foster20@example.com</email>
+    <profile>
+      <age>35</age>
+      <isActive>true</isActive>
+      <balance>1987.89</balance>
+      <registered>2020-11-25</registered>
+      <address>
+        <street>741 Sequoia St</street>
+        <city>Cliffside</city>
+        <state>CO</state>
+        <zip>22234</zip>
+      </address>
+      <preferences>
+        <newsletter>true</newsletter>
+        <notifications>
+          <notification>sms</notification>
+        </notifications>
+      </preferences>
+    </profile>
+  </person>
+</people>

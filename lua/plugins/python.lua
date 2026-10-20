@@ -1,4 +1,5 @@
-PYTHON_PATH = "C:\\Program Files\\Python312\\python.exe"
+-- Windows overrides this in lua/config/windows.lua
+PYTHON_PATH = PYTHON_PATH or "python3"
 
 return {
   -- virtual environment management

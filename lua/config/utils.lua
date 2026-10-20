@@ -139,7 +139,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     -- vim.cmd([[!latexmk -pdf -pv -xelatex]])
     local filename = vim.fn.expand("%")
-    vim.cmd("!xelatex " .. filename)
+    vim.cmd("!latexmk -xelatex " .. filename)
   end,
 })
 

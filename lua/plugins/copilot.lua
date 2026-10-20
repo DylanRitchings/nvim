@@ -18,7 +18,7 @@ return {
     },
     opts = {
       debug = true,
-      proxy = "http://webproxy-cloud.metoffice.gov.uk:8082",
+      proxy = COPILOT_PROXY, -- work proxy, set in lua/config/windows.lua
       window = {
         layout = 'vertical', 
       },
