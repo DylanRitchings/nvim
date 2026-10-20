@@ -178,12 +178,6 @@ local function get_file_commits()
   return commits
 end
 
--- Example usage: print the commits
-local commits = get_file_commits()
-for _, commit in ipairs(commits) do
-  print(commit)
-end
-
 
 -- local ts_utils = require("nvim-treesitter.ts_utils")
 -- -- Get the current node at cursor
