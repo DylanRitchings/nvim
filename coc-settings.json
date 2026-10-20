@@ -9,6 +9,24 @@
   "python.analysis.useLibraryCodeForTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "languageserver": {
+    "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"],
+      "rootPatterns": ["flake.nix", ".git"],
+      "settings": {
+        "nixd": {
+          "nixpkgs": {
+            "expr": "import (builtins.getFlake \"/Users/dylan/dev/repos/dotfiles/.config/nix\").inputs.nixpkgs-darwin {}"
+          },
+          "formatting": { "command": ["alejandra"] },
+          "options": {
+            "darwin": {
+              "expr": "(builtins.getFlake \"/Users/dylan/dev/repos/dotfiles/.config/nix\").darwinConfigurations.\"Dylans-MacBook-Pro\".options"
+            }
+          }
+        }
+      }
+    },
     "python": {
       "command": "pyright-langserver",
       "args": [
@@ -37,5 +55,8 @@
       "settings": {}
     }
   },
-  "coc.preferences.formatOnSave": true
+  "coc.preferences.formatOnSave": true,
+  "markdownlint.config": {
+    "MD013": false
+  }
 }

@@ -238,3 +238,6 @@ end
 -- Mappings
 vim.api.nvim_set_keymap('c', '<Up>', 'v:lua.wild_up_down("up")', { expr = true, noremap = true })
 vim.api.nvim_set_keymap('c', '<Down>', 'v:lua.wild_up_down("down")', { expr = true, noremap = true })
+
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")

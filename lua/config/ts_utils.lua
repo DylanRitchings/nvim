@@ -231,7 +231,8 @@ return M
 -- solution: use a thing called treesitter (this is what a lot of IDEs use in the background)
 -- what is treesitter?
 -- show the tree for a json file and then a python file
--- neovim is what makes it so easy to write functions for your text editor to use
+-- why use treesitter?
+-- neovim is what makes it so easy to write functions for your text editor to us
 -- - (allows you write code using the language lua that can be used in your IDE similar to a bash script)
 -- - (you could do this in another IDE but it will probably be harder to get started with)
 -- how I have used treesitter

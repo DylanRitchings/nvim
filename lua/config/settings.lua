@@ -92,3 +92,41 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.o.termguicolors = true -- Enable 24-bit RGB color
+
+-- Filter out line-length diagnostics from any LSP
+local orig_diagnostic_set = vim.diagnostic.set
+vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+  diagnostics = vim.tbl_filter(function(d)
+    local msg = d.message:lower()
+    return not (msg:match("line too long") or msg:match("line length") or msg:match("maximum line length") or msg:match("e501"))
+  end, diagnostics)
+  orig_diagnostic_set(namespace, bufnr, diagnostics, opts)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.wo.wrap = true
+    local _in_table = false
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      buffer = 0,
+      callback = function()
+        local ok, node = pcall(vim.treesitter.get_node)
+        if not ok or not node then return end
+        local in_table = false
+        local current = node
+        while current do
+          if current:type():match("table") then
+            in_table = true
+            break
+          end
+          current = current:parent()
+        end
+        if in_table ~= _in_table then
+          _in_table = in_table
+          vim.wo.wrap = not in_table
+        end
+      end,
+    })
+  end,
+})

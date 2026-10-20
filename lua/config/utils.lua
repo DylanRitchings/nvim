@@ -1,5 +1,6 @@
 local U = {}
 
+
 function U.ex_in_dir(func)
   return function()
     func({ cwd = vim.fn.expand("%:p:h") })
@@ -139,7 +140,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     -- vim.cmd([[!latexmk -pdf -pv -xelatex]])
     local filename = vim.fn.expand("%")
-    vim.cmd("!xelatex " .. filename)
+    vim.cmd("!latexmk -xelatex " .. filename)
   end,
 })
 
@@ -254,5 +255,3 @@ end
 --         last = child
 --     end
 -- end
-
-
